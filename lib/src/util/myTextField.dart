@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'colors.dart';
 
 Widget myTextField({
   required TextEditingController controller,
@@ -16,10 +19,12 @@ Widget myTextField({
     SizedBox(
       height: height,
       width: width,
+
       child: TextFormField(
         //  style: TextStyle(),
-
         controller: controller,
+        cursorColor: mainColor,
+
         keyboardType: keyboardType,
         onFieldSubmitted: onFieldSubmitted,
         validator: (value) {
@@ -28,25 +33,35 @@ Widget myTextField({
           }
           return null;
         },
-
+          style: TextStyle(color: Color(0xff210440)),
         obscureText: obscureText,
         decoration: InputDecoration(
+            filled: true,
+            fillColor: fillColorInTextFormField,
             labelText: labelText,
-            labelStyle:  TextStyle(color:Color(0xff666666)),
+            labelStyle:  TextStyle(color:mainColor),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30.0),
+                borderSide: BorderSide(
+                  width: 2.w,
+                    color: mainColor
+                )
+            ),
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
-            suffixIconColor: Color(0xff666666),
-            prefixIconColor: Color(0xff666666),
+            suffixIconColor:mainColor,
+            prefixIconColor: mainColor,
             hintText: hintText,
-            hintStyle: TextStyle(color: Color(0xff666666)),
+            hintStyle: TextStyle(color: mainColor),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
               borderSide: BorderSide(
-                color: Color(0xFF666666),
+                color: mainColor,
                 width: 2.0,
               ),
             ),
-            border:
-            OutlineInputBorder(borderRadius: BorderRadius.circular(30.0))),
-      ),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30.0),
+                borderSide: BorderSide(color: Color(0xFF210440),)
+)))
     );
