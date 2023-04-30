@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lang_hub/src/features/signup/prisentation/siginup.dart';
 
 import 'src/features/Login/prisentation/loginscreen.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child:  Login(),
+      child:  SignUpScreen(),
     );
   }
 }

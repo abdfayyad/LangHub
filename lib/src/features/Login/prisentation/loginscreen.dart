@@ -108,18 +108,18 @@ class Login extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
+                       Text(
                         'Don\'t have account ?',
-                        style: TextStyle(fontSize: 14,color: mainColor),
+                        style: TextStyle(fontSize: 14.sp,color: mainColor),
                       ),
                       TextButton(
                           onPressed: () {
                             //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MusicPlayer()));
                           },
-                          child: const Text(
+                          child:  Text(
                             'Sign up',
                             style: TextStyle(fontWeight: FontWeight.w700,
-                                fontSize: 16, color:mainColor),
+                                fontSize: 16.sp, color:mainColor),
                           )),
                     ],
                   ),
