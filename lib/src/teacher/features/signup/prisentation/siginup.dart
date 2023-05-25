@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lang_hub/src/features/Login/prisentation/loginscreen.dart';
 import 'package:lang_hub/src/util/colors.dart';
-import '../../../util/defaultbutton.dart';
-import '../../../util/myTextField.dart';
+
+
+import '../../../../util/defaultbutton.dart';
+import '../../../../util/myTextField.dart';
+import '../../Login/prisentation/loginscreen.dart';
 import 'bloc/cubit.dart';
 import 'bloc/states.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+class SignUpScreenStudent extends StatelessWidget {
+  const SignUpScreenStudent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class SignUpScreen extends StatelessWidget {
                               width: 307.w,
                               height: 247.h,
                               child: Image.asset('assets/images/login.png'))),
-                      Text(' Sign Up Now !',
+                      Text('Welcome Student',
                         style: TextStyle(fontWeight: FontWeight.bold,
                             color: mainColor,
                             fontSize: 30.sp),),
@@ -102,7 +104,7 @@ class SignUpScreen extends StatelessWidget {
                       Center(
                         child: defaultbutton(
                             function: () {
-//  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProfilePage()));
+                           // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProfilePage()));
 
                             },
                             text: 'Sign up',

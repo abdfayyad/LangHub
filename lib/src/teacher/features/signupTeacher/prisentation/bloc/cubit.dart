@@ -5,18 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lang_hub/src/features/signup/prisentation/bloc/states.dart';
+import 'package:lang_hub/src/teacher/features/signup/prisentation/bloc/states.dart';
+import 'package:lang_hub/src/teacher/features/signupTeacher/prisentation/bloc/states.dart';
 //import 'package:http/http.dart'as http;
 
 
-class SignInCubit extends Cubit<SignInScreenStates>
+class SignInCubitTeacher extends Cubit<SignInScreenStatesTeacher>
 {
   // final DioHelper dioHelper;
   // late SignInModel signInModel;
   String ? errorState;
-  SignInCubit():super(SignInInitialState()) ;
+  SignInCubitTeacher():super(SignInInitialStateTeacher()) ;
 // SignInCubit({required this.dioHelper}):super(SignInInitialState()) ;
-  static SignInCubit get(context)=>BlocProvider.of(context);
+  static SignInCubitTeacher get(context)=>BlocProvider.of(context);
   // userSignIn(String fname,lname,address,email,phone,password,)async
   // {
   //   emit(SignInLoadingState());
@@ -49,6 +50,6 @@ class SignInCubit extends Cubit<SignInScreenStates>
 
     suffix= isPasswordShow?
     Icons.visibility:Icons.visibility_off;
-    emit(SignInChangePasswordVisibilityState());
+    emit(SignInChangePasswordVisibilityStateTeacher());
   }
 }

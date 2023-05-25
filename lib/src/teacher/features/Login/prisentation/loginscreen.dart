@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lang_hub/src/util/colors.dart';
 
-import '../../../util/myTextField.dart';
-import '../../../util/defaultbutton.dart';
+import '../../../../util/defaultbutton.dart';
+import '../../../../util/myTextField.dart';
+
 
 class Login extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
@@ -31,7 +32,7 @@ class Login extends StatelessWidget {
                   Padding(
                     padding:  EdgeInsets.only(left: 10.w),
                     child: const Text(
-                      ' Login',
+                      ' Login Teacher',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
@@ -103,26 +104,26 @@ class Login extends StatelessWidget {
                         backround: mainColor),
                   ),
                   SizedBox(
-                    height: 16.h,
+                    height: 20.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                       Text(
-                        'Don\'t have account ?',
-                        style: TextStyle(fontSize: 14.sp,color: mainColor),
-                      ),
-                      TextButton(
-                          onPressed: () {
-                            //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MusicPlayer()));
-                          },
-                          child:  Text(
-                            'Sign up',
-                            style: TextStyle(fontWeight: FontWeight.w700,
-                                fontSize: 16.sp, color:mainColor),
-                          )),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //      Text(
+                  //       'Don\'t have account ?',
+                  //       style: TextStyle(fontSize: 14.sp,color: mainColor),
+                  //     ),
+                  //     TextButton(
+                  //         onPressed: () {
+                  //           //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MusicPlayer()));
+                  //         },
+                  //         child:  Text(
+                  //           'Sign up',
+                  //           style: TextStyle(fontWeight: FontWeight.w700,
+                  //               fontSize: 16.sp, color:mainColor),
+                  //         )),
+                  //   ],
+                  // ),
                   Row(
                     children: [
                       Expanded(child: Divider(thickness: 1,color: mainColor)),

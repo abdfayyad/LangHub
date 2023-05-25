@@ -15,6 +15,7 @@ Widget myTextField({
   TextInputType? keyboardType,
   Icon? prefixIcon,
   ValueChanged<String>? onFieldSubmitted,
+  Color colorfillColor=fillColorInTextFormField
 }) =>
     SizedBox(
       height: height,
@@ -37,7 +38,7 @@ Widget myTextField({
         obscureText: obscureText,
         decoration: InputDecoration(
             filled: true,
-            fillColor: fillColorInTextFormField,
+            fillColor: colorfillColor,
             labelText: labelText,
             labelStyle:  TextStyle(color:mainColor),
             focusedBorder: OutlineInputBorder(
