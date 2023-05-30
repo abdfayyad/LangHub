@@ -5,6 +5,7 @@ import 'package:lang_hub/src/teacher/features/home/prisentation/chatting.dart';
 import 'package:lang_hub/src/teacher/features/home/prisentation/courseDetailsTeacher.dart';
 import 'package:lang_hub/src/teacher/features/home/prisentation/institute_details.dart';
 import 'package:lang_hub/src/teacher/features/home/prisentation/list_of_institute_teacher.dart';
+import 'package:lang_hub/src/teacher/features/home/prisentation/list_of_studentes_teacher.dart';
 import 'package:lang_hub/src/teacher/features/home/prisentation/students_in_teacher.dart';
 
 import '../profile_teacher.dart';
@@ -20,7 +21,7 @@ class HomeTeacherCubit extends Cubit<HomeTeacherStates>{
     ListOfInstituteTeacher(),
     MyHomePage(),
     ListOfCoursesTeacher(),
-    StudentsInTeacher(),
+    ListOfStudentTeacher(),
     Chatting(),
 
 
