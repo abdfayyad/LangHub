@@ -17,7 +17,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lang_hub/src/both/onboarding/on_boarding_screen.dart';
-import 'package:lang_hub/src/teacher/features/Login/prisentation/loginscreen.dart';
 import 'package:lang_hub/src/util/colors.dart';
 
 

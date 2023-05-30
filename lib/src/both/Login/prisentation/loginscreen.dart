@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lang_hub/src/util/colors.dart';
 
-import '../../../../util/defaultbutton.dart';
-import '../../../../util/myTextField.dart';
+import '../../../util/defaultbutton.dart';
+import '../../../util/myTextField.dart';
+
 
 
 class Login extends StatelessWidget {

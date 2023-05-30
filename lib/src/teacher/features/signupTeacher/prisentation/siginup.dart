@@ -7,9 +7,9 @@ import 'package:lang_hub/src/teacher/features/signupTeacher/prisentation/bloc/st
 import 'package:lang_hub/src/util/colors.dart';
 
 
+import '../../../../both/Login/prisentation/loginscreen.dart';
 import '../../../../util/defaultbutton.dart';
 import '../../../../util/myTextField.dart';
-import '../../Login/prisentation/loginscreen.dart';
 
 
 class SignUpScreenTeacher extends StatelessWidget {

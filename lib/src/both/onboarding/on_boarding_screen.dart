@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lang_hub/src/teacher/features/Login/prisentation/loginscreen.dart';
-import 'package:lang_hub/src/teacher/features/signup/prisentation/siginup.dart';
 import 'package:lang_hub/src/teacher/features/signupTeacher/prisentation/siginup.dart';
 import 'package:lang_hub/src/util/colors.dart';
 import 'package:lang_hub/src/util/defaultbutton.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../Student/featuers/signup/prisentation/siginup.dart';
 
 
 class BoarderModel
