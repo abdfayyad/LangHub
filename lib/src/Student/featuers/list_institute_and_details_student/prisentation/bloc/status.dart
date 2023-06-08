@@ -1,0 +1,5 @@
+abstract class InstituteStudentStatus{}
+class InstituteStudentInitializeState extends InstituteStudentStatus{}
+class InstituteStudentLoadingState extends InstituteStudentStatus{}
+class InstituteStudentSuccessState extends InstituteStudentStatus{}
+class InstituteStudentErrorState extends InstituteStudentStatus{}

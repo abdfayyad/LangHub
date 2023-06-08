@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lang_hub/src/teacher/features/home/prisentation/students_in_teacher.dart';
+import 'package:lang_hub/src/teacher/features/list_of_student_and_details_teacher/prisentation/students_in_teacher.dart';
 
 import '../../../../util/colors.dart';
 

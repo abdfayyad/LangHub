@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lang_hub/src/teacher/features/home/prisentation/institute_details.dart';
+import 'package:lang_hub/src/teacher/features/list_institute_and_details_teacher/prisentation/institute_details.dart';
 
 import '../../../../util/colors.dart';
 

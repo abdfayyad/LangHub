@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lang_hub/src/util/colors.dart';
 
-class MyHomePage extends StatefulWidget {
+class ProfileTeacher extends StatefulWidget {
 
 //proton vpn cli c -f -p tcp
   late final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _ProfileTeacherState createState() => _ProfileTeacherState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
+class _ProfileTeacherState extends State<ProfileTeacher>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   @override

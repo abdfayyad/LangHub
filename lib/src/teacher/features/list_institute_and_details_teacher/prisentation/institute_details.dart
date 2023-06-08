@@ -9,7 +9,7 @@ import 'package:lang_hub/src/util/details_container.dart';
 import '../../../../util/colors.dart';
 import '../../../../util/colors.dart';
 import '../../../../util/summary.dart';
-import 'widget/rate_and_like_and_dislike.dart';
+import '../../home/prisentation/widget/rate_and_like_and_dislike.dart';
 
 class InstituteDetails extends StatelessWidget {
   const InstituteDetails({Key? key}) : super(key: key);

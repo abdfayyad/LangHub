@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lang_hub/src/teacher/features/home/prisentation/courseDetailsTeacher.dart';
+import 'package:lang_hub/src/teacher/features/list_of_courses_and_details_teacher/prisentation/courseDetailsTeacher.dart';
 import 'package:lang_hub/src/util/SmoothPageIndicator.dart';
 
 import '../../../../util/colors.dart';

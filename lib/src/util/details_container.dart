@@ -6,11 +6,12 @@ import 'colors.dart';
 Widget detailsContainer({
   required String text,
   double width=290,
-  double height=40
+  double height=40,
+  double sizedbox=15,
 }){
   return    Column(
     children: [
-      SizedBox(height: 15.h,),
+      SizedBox(height: sizedbox.h,),
       Container(height:height.h ,width:width.w,
         decoration: BoxDecoration(
             color: fillColorInTextFormField,

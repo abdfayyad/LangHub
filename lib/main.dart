@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lang_hub/src/Student/featuers/home_student/prisentation/home_student.dart';
 
 import 'package:lang_hub/src/teacher/features/home/prisentation/home_teacher.dart';
 import 'package:lang_hub/src/util/colors.dart';
@@ -28,6 +29,6 @@ class MyApp extends StatelessWidget {
             home: child,
           );
         },
-        child: HomeTeacher());
+        child: HomeStudent());
   }
 }
