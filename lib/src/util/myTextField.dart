@@ -15,7 +15,8 @@ Widget myTextField({
   TextInputType? keyboardType,
   Icon? prefixIcon,
   ValueChanged<String>? onFieldSubmitted,
-  Color colorfillColor=fillColorInTextFormField
+  Color colorfillColor=fillColorInTextFormField,
+  double radios =30,
 }) =>
     SizedBox(
       height: height,
@@ -42,7 +43,7 @@ Widget myTextField({
             labelText: labelText,
             labelStyle:  TextStyle(color:mainColor),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30.0),
+                borderRadius: BorderRadius.circular(radios.r),
                 borderSide: BorderSide(
                   width: 2.w,
                     color: mainColor

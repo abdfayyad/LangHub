@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lang_hub/src/Student/featuers/list_of_courses_and_details_student/prisentation/profile_teacher_in%20course.dart';
 import 'package:lang_hub/src/Student/featuers/list_of_courses_and_details_student/prisentation/show_lessons_student.dart';
 import 'package:lang_hub/src/Student/featuers/widgets/show_time_and_days.dart';
 
@@ -46,6 +47,10 @@ class DetailsCoursesStudent extends StatelessWidget {
               detailsContainer(text: '5500.sp'),
               detailsContainer(text: '30 hours'),
               detailsContainer(text: '15seats'),
+              InkWell(
+                  onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProfileTeacherInCourse()));},
+                  child: detailsContainer(text: 'given by mostafa')),
+              SizedBox(height: 10.h,),
               Padding(
                 padding:  EdgeInsets.symmetric(vertical: 0.h,horizontal: 20.w),
                 child: Column(

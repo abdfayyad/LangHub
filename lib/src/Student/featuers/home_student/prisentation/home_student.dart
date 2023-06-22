@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lang_hub/src/Student/featuers/home_student/prisentation/bloc/cubit.dart';
 import 'package:lang_hub/src/Student/featuers/home_student/prisentation/bloc/states.dart';
+import 'package:lang_hub/src/Student/featuers/pending_list_student/prisentation/pending_list_student.dart';
 import 'package:lang_hub/src/Student/featuers/search_and_enrollment_student/prisentation/search_student.dart';
 
 import 'package:lang_hub/src/util/colors.dart';
@@ -36,6 +37,17 @@ class HomeStudent extends StatelessWidget {
                   color: mainColor,
                   icon: Icon(
                     Icons.search,
+
+                    color: mainColor,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PendingListStudent()));
+                  },
+                  color: mainColor,
+                  icon: Icon(
+                    Icons.send_to_mobile,
 
                     color: mainColor,
                   ),

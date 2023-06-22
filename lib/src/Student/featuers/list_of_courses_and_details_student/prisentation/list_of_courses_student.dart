@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lang_hub/src/Student/featuers/list_of_courses_and_details_student/prisentation/details_courses_student.dart';
+import 'package:lang_hub/src/Student/featuers/search_and_enrollment_student/prisentation/details_offers_enrollment.dart';
 import 'package:lang_hub/src/util/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -49,39 +50,46 @@ class ListOfCoursesStudent extends StatelessWidget {
             items: productDetails.map((details) {
               return Builder(
                 builder: (BuildContext context) {
-                  return Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 190.h,
-                    decoration: BoxDecoration(
-                      color: fillColorInTextFormField,
-                        borderRadius: BorderRadius.circular(20.r)
+                  return InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsOffersEnrollment()));
+                  }
+                  ,
 
-                    ),
-                   // margin: EdgeInsets.symmetric(horizontal: 5.0),
-                    child: Row(
-                      children: [
-                        Container(
-                            width:152.w,
-                            height: 190.h,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20.r)
-                                  ,image: DecorationImage(image: AssetImage(details[0]),fit: BoxFit.cover)
-                            ),
-                           // child: Image(image: AssetImage(details[0]))
-                        ),
-                        SizedBox(width: 15.w,),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(details[1], style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.bold,color: mainColor)),
-                            Text(details[2], style:TextStyle(fontSize: 16.sp,fontWeight: FontWeight.bold,color: mainColor)),
-                            Text(details[3], style:TextStyle(fontSize: 16.sp,fontWeight: FontWeight.normal,color: mainColor)),
-                            Text(details[4], style:TextStyle(fontSize: 16.sp,fontWeight: FontWeight.normal,color: mainColor)),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 190.h,
+                      decoration: BoxDecoration(
+                        color: fillColorInTextFormField,
+                          borderRadius: BorderRadius.circular(20.r)
 
-                          ],
-                        ),
-                      ],
+                      ),
+                     // margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Row(
+                        children: [
+                          Container(
+                              width:152.w,
+                              height: 190.h,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20.r)
+                                    ,image: DecorationImage(image: AssetImage(details[0]),fit: BoxFit.cover)
+                              ),
+                             // child: Image(image: AssetImage(details[0]))
+                          ),
+                          SizedBox(width: 15.w,),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(details[1], style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.bold,color: mainColor)),
+                              Text(details[2], style:TextStyle(fontSize: 16.sp,fontWeight: FontWeight.bold,color: mainColor)),
+                              Text(details[3], style:TextStyle(fontSize: 16.sp,fontWeight: FontWeight.normal,color: mainColor)),
+                              Text(details[4], style:TextStyle(fontSize: 16.sp,fontWeight: FontWeight.normal,color: mainColor)),
+
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },

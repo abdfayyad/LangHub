@@ -31,7 +31,7 @@ class SearchStudentCubit extends Cubit<SearchStudentStatus> {
   // }
 
 
-int cc=2;
+int cc=1;
 void changValueOfSearch1(int x){
   cc=x;
   emit(ChangeValueIndex());

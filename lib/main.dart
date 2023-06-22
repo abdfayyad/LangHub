@@ -29,6 +29,6 @@ class MyApp extends StatelessWidget {
             home: child,
           );
         },
-        child: HomeStudent());
+        child: HomeTeacher());
   }
 }

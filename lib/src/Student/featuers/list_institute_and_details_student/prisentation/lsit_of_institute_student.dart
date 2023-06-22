@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lang_hub/src/teacher/features/list_institute_and_details_teacher/prisentation/institute_details.dart';
+import 'package:lang_hub/src/Student/featuers/list_institute_and_details_student/prisentation/details_institute_student.dart';
+import 'package:lang_hub/src/teacher/features/list_institute_and_details_teacher/prisentation/institute_detailsTeacher.dart';
 
 import '../../../../util/colors.dart';
 
@@ -18,7 +19,7 @@ class ListOfInstituteStudent extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
                 onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InstituteDetails()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailsInstituteStudent()));
                   // navigateTo(context, CourseDetails());
                 },
                 child: Container(
