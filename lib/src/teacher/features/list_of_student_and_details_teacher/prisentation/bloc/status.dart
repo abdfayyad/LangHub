@@ -1,0 +1,10 @@
+abstract class StudentInTeacherState{}
+ class StudentInTeacherInitializeState extends StudentInTeacherState{}
+
+ class StudentInTeacherLoadingState extends StudentInTeacherState{}
+ class StudentInTeacherSuccessState extends StudentInTeacherState{}
+ class StudentInTeacherErrorState extends StudentInTeacherState{}
+
+class StudentInTeacherDetailsLoadingState extends StudentInTeacherState{}
+class StudentInTeacherDetailsSuccessState extends StudentInTeacherState{}
+class StudentInTeacherDetailsErrorState extends StudentInTeacherState{}

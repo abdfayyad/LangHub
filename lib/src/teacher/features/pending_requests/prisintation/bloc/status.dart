@@ -1,0 +1,7 @@
+abstract class PendingListTeacherStatus{}
+class PendingListTeacherInitializeState extends PendingListTeacherStatus{}
+class PendingListTeacherLoadingState extends PendingListTeacherStatus{}
+class PendingListTeacherSuccessState extends PendingListTeacherStatus{
+
+}
+class PendingListTeacherErrorState extends PendingListTeacherStatus{}

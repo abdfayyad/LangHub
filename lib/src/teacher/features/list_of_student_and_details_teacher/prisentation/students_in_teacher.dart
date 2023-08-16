@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../util/colors.dart';
+import 'bloc/cubit.dart';
+import 'bloc/status.dart';
 
-class StudentsInTeacher extends StatelessWidget {
-  const StudentsInTeacher({Key? key}) : super(key: key);
+class StudentsDetailsInTeacher extends StatelessWidget {
+  const StudentsDetailsInTeacher({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(create: (BuildContext context)=>StudentInTeacherCubit(),
+        child: BlocConsumer<StudentInTeacherCubit,StudentInTeacherState>(
+        listener: (context,state){},
+    builder: (context,state){
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'courses details',
+          'Student details',
           style: TextStyle(color: mainColor),
         ),
         backgroundColor: fillColorInTextFormField,
@@ -39,6 +46,9 @@ class StudentsInTeacher extends StatelessWidget {
           );
         },
       ),
+    );
+    },
+        ),
     );
   }
 }

@@ -1,16 +1,17 @@
 
+import 'package:lang_hub/src/teacher/features/signupTeacher/data/sign_in_model_teacher.dart';
+
 abstract class SignInScreenStatesTeacher{}
 
 class SignInInitialStateTeacher extends SignInScreenStatesTeacher{}
 class SignInLoadingStateTeacher extends SignInScreenStatesTeacher{}
 class SignInSuccessStateTeacher extends SignInScreenStatesTeacher
 {
-  // final SignInModel signInModel;
-  //
-  // SignInSuccessState(this.signInModel);
+  final SignInModelTeacher signInModel;
+
+  SignInSuccessStateTeacher(this.signInModel);
 }
 class SignInErrorStateTeacher extends SignInScreenStatesTeacher{
-  final String ? error;
-  SignInErrorStateTeacher(this.error);
+
 }
 class SignInChangePasswordVisibilityStateTeacher extends SignInScreenStatesTeacher{}

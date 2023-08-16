@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lang_hub/src/Student/featuers/list_of_courses_and_details_student/prisentation/bloc/cubit.dart';
 import 'package:lang_hub/src/util/colors.dart';
 
 import '../../../../teacher/features/home/prisentation/widget/rate_and_like_and_dislike.dart';
 import '../../../../util/details_container.dart';
 import '../../../../util/summary.dart';
+import 'bloc/status.dart';
 
 class ProfileTeacherInCourse extends StatelessWidget {
   const ProfileTeacherInCourse({Key? key}) : super(key: key);
@@ -14,80 +17,87 @@ class ProfileTeacherInCourse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Teacher profile',
-          style: TextStyle(color: mainColor),
-        ),
-        backgroundColor: fillColorInTextFormField,
-        iconTheme: IconThemeData(color: mainColor),
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 15.h,
-              ),
-              CircleAvatar(
-                backgroundImage: AssetImage('assets/images/p.png'),
-                radius: 110.r,
-              ),
-              SizedBox(
-                height: 15.h,
-              ),
-
-              ShowRateInstituteAndTeacher(rate: 3),
-              SizedBox(height: 15.h,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+    return BlocProvider(create:(BuildContext context)=>CourseStudentCubit(),
+    child: BlocConsumer<CourseStudentCubit,CourseStudentStatus>(
+      listener: (context,state){},
+      builder: (context,state){
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              'Teacher profile',
+              style: TextStyle(color: mainColor),
+            ),
+            backgroundColor: fillColorInTextFormField,
+            iconTheme: IconThemeData(color: mainColor),
+          ),
+          body: SingleChildScrollView(
+            child: Center(
+              child: Column(
                 children: [
-                  Text(
-                    'You rate:',
-                    style: TextStyle(
-                        color: mainColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.sp),
+                  SizedBox(
+                    height: 15.h,
                   ),
-                  RatingBar.builder(
-                    initialRating: 3,
-                    minRating: 1,
-                    direction: Axis.horizontal,
-                    allowHalfRating: true,
-                    itemCount: 5,
-                    itemSize: 28,
-                    itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
-                    itemBuilder: (context, _) => Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    ),
-                    onRatingUpdate: (rating) {
-                      print(rating);
-                    },
+                  CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/p.png'),
+                    radius: 110.r,
                   ),
+                  SizedBox(
+                    height: 15.h,
+                  ),
+
+                  ShowRateInstituteAndTeacher(rate: 3),
+                  SizedBox(height: 15.h,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'You rate:',
+                        style: TextStyle(
+                            color: mainColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.sp),
+                      ),
+                      RatingBar.builder(
+                        initialRating: 3,
+                        minRating: 1,
+                        direction: Axis.horizontal,
+                        allowHalfRating: true,
+                        itemCount: 5,
+                        itemSize: 28,
+                        itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
+                        itemBuilder: (context, _) => Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        onRatingUpdate: (rating) {
+                          print(rating);
+                        },
+                      ),
+                    ],
+                  ),
+                  detailsContainer(text: 'Abd fy'),
+                  detailsContainer(text: '0936251498'),
+                  detailsContainer(text: 'abd@gmail.com'),
+                  SizedBox(
+                    height: 15.h,
+                  ),
+
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                  ShowMoreShowLess(text: description),
+                  SizedBox(
+                    height: 15.h,
+                  ),
+
+
                 ],
               ),
-              detailsContainer(text: 'Abd fy'),
-              detailsContainer(text: '0936251498'),
-              detailsContainer(text: 'abd@gmail.com'),
-              SizedBox(
-                height: 15.h,
-              ),
-
-              SizedBox(
-                height: 15.h,
-              ),
-              ShowMoreShowLess(text: description),
-              SizedBox(
-                height: 15.h,
-              ),
-
-
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
+    ),
     );
   }
 }

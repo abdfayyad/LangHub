@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lang_hub/src/Student/featuers/home_student/prisentation/home_student.dart';
+import 'package:lang_hub/src/both/Login/prisentation/loginscreen.dart';
+import 'package:lang_hub/src/both/splash/spalsh_screen.dart';
 
 import 'package:lang_hub/src/teacher/features/home/prisentation/home_teacher.dart';
 import 'package:lang_hub/src/util/colors.dart';
+import 'package:lang_hub/src/util/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPref.init();
+
   runApp(const MyApp());
 }
 
@@ -29,6 +36,6 @@ class MyApp extends StatelessWidget {
             home: child,
           );
         },
-        child: HomeTeacher());
+        child: SplashScreen());
   }
 }

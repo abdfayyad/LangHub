@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../util/colors.dart';
+import 'bloc/cubit.dart';
+import 'bloc/status.dart';
 
 class PendingListTeacher extends StatelessWidget {
   const PendingListTeacher({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(create: (BuildContext context)=>PendingListTeacherCubit(),
+        child: BlocConsumer<PendingListTeacherCubit,PendingListTeacherStatus>(
+        listener: (context,state){},
+    builder: (context,state){
     return Scaffold(
       appBar: AppBar(
         backgroundColor: fillColorInTextFormField,
@@ -49,7 +56,7 @@ class PendingListTeacher extends StatelessWidget {
                           children: [
                             Text(' ALTC institue',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp,color: mainColor),),
                             SizedBox(height: 15.h,),
-                            Text(' English',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp,color: mainColor),),
+                            Text(' Baghdad Street',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp,color: mainColor),),
                           ],
                         ),
                       ),
@@ -126,6 +133,9 @@ class PendingListTeacher extends StatelessWidget {
               ),
             );
           }),
+    );
+    },
+        ),
     );
   }
 }

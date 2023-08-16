@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lang_hub/src/util/colors.dart';
 
-Widget ShowMoreShowLess({required String text}) {
+Widget ShowMoreShowLess({required String? text}) {
   return Container(
     margin: const EdgeInsets.only(left: 10, top: 0.0, right: 10.0, bottom: 0.0),
 // padding: const EdgeInsets.all(3.0),
@@ -17,7 +17,7 @@ Widget ShowMoreShowLess({required String text}) {
 }
 
 class DescriptionTextWidget extends StatefulWidget {
-  final String text;
+  final String ?text;
 
   DescriptionTextWidget({required this.text});
 
@@ -36,11 +36,11 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
   void initState() {
     super.initState();
 
-    if (widget.text.length > 200) {
-      firstHalf = widget.text.substring(0, 200);
-      secondHalf = widget.text.substring(200, widget.text.length);
+    if (widget.text!.length > 200) {
+      firstHalf = widget.text!.substring(0, 200);
+      secondHalf = widget.text!.substring(200, widget.text!.length);
     } else {
-      firstHalf = widget.text;
+      firstHalf = widget.text!;
       secondHalf = "";
     }
   }
