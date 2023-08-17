@@ -59,4 +59,40 @@ class CourseStudentCubit extends Cubit<CourseStudentStatus>{
       throw Exception('Failed to load profile data');
     }
   }
+  ///solve exam-------------------------------------------------
+//   Future<void> solveExam(String email, String password) async {
+//     // Define the API endpoint URL
+//     final url = Uri.parse('${URL}login');
+//
+//     // Create a map with the request data
+//     final data = {'email': 'ahm@gmail.com', 'password': 'password'};
+//
+//     try {
+//       print("tryyy");
+//       emit(LoginScreenLoadingState());
+//
+//       final response = await http.post(url, body: data);
+//       // Check if the request was successful
+//       if (response.statusCode == 200) {
+//
+//         // Request successful, do something with the response
+//         print('Login successful');
+//         print(response.body);
+//         final responseData = jsonDecode(response.body);
+//         // return UserModel.fromJson(responseData);
+//         loginModel=LoginModel.fromJson(responseData);
+//         emit(LoginScreenSuccessState(loginModel));
+//         // print(loginModel.role);
+//         // print(loginModel.token);
+//       } else {
+//         emit(LoginScreenErrorState());
+//         // Request failed, handle the error
+//         print('Login failed');
+//         print('Status code: ${response.statusCode}');
+//         print('Error message: ${response.body}');
+//       }
+//     } catch (e) {
+// print(e);
+//     }
+//   }
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lang_hub/src/Student/featuers/home_student/prisentation/home_student.dart';
+import 'package:lang_hub/src/Student/featuers/list_of_courses_and_details_student/prisentation/solve_exam_student.dart';
 import 'package:lang_hub/src/both/Login/prisentation/loginscreen.dart';
 import 'package:lang_hub/src/both/splash/spalsh_screen.dart';
 
 import 'package:lang_hub/src/teacher/features/home/prisentation/home_teacher.dart';
+import 'package:lang_hub/src/teacher/features/list_of_courses_and_details_teacher/prisentation/add_degrees.dart';
 import 'package:lang_hub/src/util/colors.dart';
 import 'package:lang_hub/src/util/shared_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,6 +38,6 @@ class MyApp extends StatelessWidget {
             home: child,
           );
         },
-        child: SplashScreen());
+        child: Login());
   }
 }

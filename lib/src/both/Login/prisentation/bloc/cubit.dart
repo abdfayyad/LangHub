@@ -63,31 +63,7 @@ class LoginScreenCubit extends Cubit<LoginScreenStatus>{
       }
     }
   }
-  Future<void> postEmailAndPassword(String email, String password) async {
-    final dio = Dio();
-    final url = '${URL}login'; // Replace with your API endpoint
 
-    try {
-      final response = await dio.post(
-        url,
-        data: {
-          'email': email,
-          'password': password,
-        },
-      );
-
-      if (response.statusCode == 200) {
-        print('Login successful');
-        // You can handle the successful response here
-      } else {
-        print('Login failed');
-        // Handle login failure here
-      }
-    } catch (error) {
-      print('Error occurred: $error');
-      // Handle any errors that occurred during the API call
-    }
-  }
   IconData suffix=Icons.visibility;
   bool isPasswordShow=true;
   void changePasswordVisibility(){
