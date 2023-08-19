@@ -1,11 +1,11 @@
-class AllInstituteTeacherModel {
+class PendingListTeacherModel {
   int? status;
   String? message;
   List<Data>? data;
 
-  AllInstituteTeacherModel({this.status, this.message, this.data});
+  PendingListTeacherModel({this.status, this.message, this.data});
 
-  AllInstituteTeacherModel.fromJson(Map<String, dynamic> json) {
+  PendingListTeacherModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {
@@ -31,17 +31,15 @@ class Data {
   int? id;
   String? name;
   String? location;
-  dynamic? rate;
-  String? photo;
+  String? image;
 
-  Data({this.id, this.name, this.location, this.rate, this.photo});
+  Data({this.id, this.name, this.location, this.image});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     location = json['location'];
-    rate = json['rate'];
-    photo = json['photo'];
+    image = json['image'];
   }
 
   Map<String, dynamic> toJson() {
@@ -49,8 +47,7 @@ class Data {
     data['id'] = this.id;
     data['name'] = this.name;
     data['location'] = this.location;
-    data['rate'] = this.rate;
-    data['photo'] = this.photo;
+    data['image'] = this.image;
     return data;
   }
 }

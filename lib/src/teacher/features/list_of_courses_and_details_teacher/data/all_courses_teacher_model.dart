@@ -39,6 +39,7 @@ class Courses {
   String? startTime;
   String? endTime;
   String? academyName;
+  int? studentNumber;
 
   Courses(
       {this.id,
@@ -51,7 +52,8 @@ class Courses {
         this.hasExam,
         this.startTime,
         this.endTime,
-        this.academyName});
+        this.academyName,
+        this.studentNumber});
 
   Courses.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -65,6 +67,7 @@ class Courses {
     startTime = json['start_time'];
     endTime = json['end_time'];
     academyName = json['academy_name'];
+    studentNumber = json['student_number'];
   }
 
   Map<String, dynamic> toJson() {
@@ -80,6 +83,7 @@ class Courses {
     data['start_time'] = this.startTime;
     data['end_time'] = this.endTime;
     data['academy_name'] = this.academyName;
+    data['student_number'] = this.studentNumber;
     return data;
   }
 }

@@ -2,58 +2,60 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart'as http;
+import 'package:lang_hub/src/teacher/features/list_institute_and_details_teacher/data/all_institute_teacher_model.dart';
 import 'package:lang_hub/src/teacher/features/list_institute_and_details_teacher/prisentation/bloc/status.dart';
 import 'package:lang_hub/src/util/end_pointes.dart';
 
 import '../../../../../util/shared_preferences.dart';
+import '../../data/details_institute_teacher_model.dart';
 
 
-class InstituteTeacherCubit extends Cubit<InstituteDetailsTeacherStatus>{
-  InstituteTeacherCubit():super(InstituteDetailsTeacherInitializeState());
-///show Teacher institute List
-
-  Future<void> getListTeacherInstitute() async {
+class InstituteTeacherCubit extends Cubit<InstituteTeacherStatus>{
+  InstituteTeacherCubit():super(InstituteTeacherInitializeState());
+///show Teacher institute List-----------------
+AllInstituteTeacherModel ?allInstituteTeacherModel;
+  Future<AllInstituteTeacherModel?> getListTeacherInstitute() async {
     final headers = {
       'Accept': 'application/json',
       'Authorization': 'Bearer ${SharedPref.getData(key: 'token')}', // Replace with your header key and value
     };
     final response = await http.get(
-        Uri.parse('${URL}Teacher/academies'),headers: headers);
-
+        Uri.parse('${URL}teacher/institutes'),headers: headers);
+emit(InstituteTeacherLoadingState());
     if (response.statusCode == 200) {
       print("institute success");
       // print(response.body);
       final parsedJson = jsonDecode(response.body);
-
-      emit(InstituteDetailsTeacherSuccessState());
+allInstituteTeacherModel=AllInstituteTeacherModel.fromJson(parsedJson);
+      emit(InstituteTeacherSuccessState(allInstituteTeacherModel!));
     }else {
       print("certificate field");
-      emit(InstituteDetailsTeacherErrorState());
+      emit(InstituteTeacherErrorState());
       throw Exception('Failed to load profile data');
     }
   }
 
 
   ///show details institute
-
-  Future<void> getListTeacherInstituteDetails(int id) async {
+  DetailsInstituteTeacherModel? detailsInstituteTeacherModel;
+  Future<DetailsInstituteTeacherModel?> getListTeacherInstituteDetails(int id) async {
     final headers = {
       'Accept': 'application/json',
       'Authorization': 'Bearer ${SharedPref.getData(key: 'token')}', // Replace with your header key and value
     };
     final response = await http.get(
-        Uri.parse('${URL}Teacher/academies/show/${id}'),headers: headers);
-
+        Uri.parse('${URL}teacher/institutes/${id}'),headers: headers);
+emit(InstituteDetailsTeacherLoadingState());
     if (response.statusCode == 200) {
       print("institute details success");
       // print(response.body);
       final parsedJson = jsonDecode(response.body);
      // print(response.body);
-
-      //emit(InstituteDetailsTeacherSuccessState());
+   detailsInstituteTeacherModel=DetailsInstituteTeacherModel.fromJson(parsedJson);
+      emit(InstituteDetailsTeacherSuccessState(detailsInstituteTeacherModel!));
     }else {
-      print("certificate field");
-      //emit(InstituteDetailsTeacherErrorState());
+      print("show institute details field");
+      emit(InstituteDetailsTeacherErrorState());
       throw Exception('Failed to load profile data');
     }
   }

@@ -8,12 +8,15 @@ import 'package:lang_hub/src/util/myTextField.dart';
 
 import '../../../../util/details_container.dart';
 import '../../../../util/summary.dart';
+import '../data/details_courses_teacher_model.dart';
 import 'add_degrees.dart';
 import 'bloc/cubit.dart';
 import 'bloc/status.dart';
 
 class CourseDetails extends StatelessWidget {
-  CourseDetails({Key? key}) : super(key: key);
+  CourseDetails({Key? key, required this.id}) : super(key: key);
+  final int? id;
+  DetailsCoursesTeacherModel ? detailsCoursesTeacherModel;
   final String description =
       "Flutter is Google’s mobile UI framework for crafting high-quality native interfaces on iOS and Android in record time. Flutter works with existing code, is used by developers and organizations around the world, and is free and open source. have a question , how can I put the show more behind the text , I mean it looks like this Flutter is Google’s mobile UI framework for... show more,they are both in the same line Flutter is Google’s mobile UI framework for crafting high-quality native interfaces on iOS and Android in record time. Flutter works with existing code, is used by developers and organizations around the world, and is free and open source. have a question , how can I put the show more behind the text , I mean it looks like this Flutter is Google’s mobile UI framework for... show more,they are both in the same line";
   var titleController = TextEditingController();
@@ -26,9 +29,14 @@ class CourseDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (BuildContext context) => CourseTeacherCubit(),
+    return BlocProvider(
+      create: (BuildContext context) => CourseTeacherCubit()..getCourses(id!),
       child: BlocConsumer<CourseTeacherCubit, CourseTeacherStatus>(
-        listener: (context, state) {},
+        listener: (context, state) {
+           if(state is CourseTeacherOneSuccessState)
+             detailsCoursesTeacherModel=state.detailsCoursesTeacherModel;
+
+        },
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
@@ -39,7 +47,7 @@ class CourseDetails extends StatelessWidget {
               backgroundColor: fillColorInTextFormField,
               iconTheme: IconThemeData(color: mainColor),
             ),
-            body: SingleChildScrollView(
+            body:detailsCoursesTeacherModel?.course==null?Center(child: CircularProgressIndicator(),): SingleChildScrollView(
               child: Center(
                 child: Column(
                   children: [
@@ -52,21 +60,21 @@ class CourseDetails extends StatelessWidget {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage('assets/images/p.png')),
+                            image: NetworkImage('${detailsCoursesTeacherModel!.course!.courseImage}')),
                         color: mainColor,
                         borderRadius: BorderRadius.circular(38.r),
                       ),
                     ),
-                    detailsContainer(text: 'Antro A'),
-                    detailsContainer(text: '5500.sp'),
-                    detailsContainer(text: '30 hours'),
-                    detailsContainer(text: '15seats'),
+                    detailsContainer(text: '${detailsCoursesTeacherModel!.course!.name}'),
+                    detailsContainer(text: '${detailsCoursesTeacherModel!.course!.price}'),
+                    detailsContainer(text: '${detailsCoursesTeacherModel!.course!.hours}'),
+                    detailsContainer(text: '${detailsCoursesTeacherModel!.course!.seats}'),
 
 
                     SizedBox(
                       height: 15.h,
                     ),
-                    ShowMoreShowLess(text: description),
+                    ShowMoreShowLess(text:detailsCoursesTeacherModel!.course!.description),
                   ],
                 ),
               ),
@@ -83,7 +91,119 @@ class CourseDetails extends StatelessWidget {
                     labelStyle: TextStyle(
                         fontSize: 16.sp, fontWeight: FontWeight.bold),
                     onTap: () {
-                      AddQustion(context);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext ccontext) =>
+                              SingleChildScrollView(
+                                child: AlertDialog(
+                                  backgroundColor: fillColorInTextFormField,
+                                  shape: RoundedRectangleBorder(
+
+                                      borderRadius: BorderRadius.circular(16.0)),
+                                  //this right here
+                                  content: SingleChildScrollView(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+
+                                        height: 690.h,
+                                        width: double.infinity,
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            SizedBox(height: 10.h,),
+                                            Text(" Add title lesson:", style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20.sp,
+                                                color: mainColor),),
+                                            SizedBox(height: 10.h,),
+                                            myTextField(controller: titleController,
+                                                colorfillColor: Color(0xffffffff)),
+                                            SizedBox(height: 10.h,),
+                                            Text(" question 1:", style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20.sp,
+                                                color: mainColor),),
+                                            SizedBox(height: 10.h,),
+                                            myTextField(controller: q1Controller,
+                                                colorfillColor: Color(0xffffffff)),
+                                            SizedBox(height: 10.h,),
+                                            Text(" question 2:", style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20.sp,
+                                                color: mainColor),),
+                                            SizedBox(height: 10.h,),
+                                            myTextField(controller: q2Controller,
+                                                colorfillColor: Color(0xffffffff)),
+                                            SizedBox(height: 10.h,),
+                                            Text(" question 3:", style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20.sp,
+                                                color: mainColor),),
+                                            SizedBox(height: 10.h,),
+                                            myTextField(controller: q3Controller,
+                                                colorfillColor: Color(0xffffffff)),
+                                            SizedBox(height: 10.h,),
+                                            Text(" question 4:", style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20.sp,
+                                                color: mainColor),),
+                                            SizedBox(height: 10.h,),
+                                            myTextField(controller: q4Controller,
+                                                colorfillColor: Color(0xffffffff)),
+                                            SizedBox(height: 10.h,),
+                                            Text(" question 5:", style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20.sp,
+                                                color: mainColor),),
+                                            SizedBox(height: 10.h,),
+                                            myTextField(controller: q5Controller,
+                                                colorfillColor: Color(0xffffffff)),
+                                            SizedBox(height: 10.h,),
+                                            Text(" question 6:", style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20.sp,
+                                                color: mainColor),),
+                                            SizedBox(height: 10.h,),
+                                            myTextField(controller: q6Controller,
+                                                colorfillColor: Color(0xffffffff)),
+                                            SizedBox(height: 10.h,),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children: [
+                                                TextButton(onPressed: () {},
+                                                    child: Text('cancel',
+                                                      style: TextStyle(fontWeight: FontWeight.bold,
+                                                          fontSize: 20.sp,
+                                                          color: mainColor),)),
+                                                SizedBox(width: 10.w,),
+                                                TextButton(onPressed: (){
+                                                  BlocProvider.of<CourseTeacherCubit>(context).addLesson(
+                                                      detailsCoursesTeacherModel!.course!.id!,
+                                                      titleController.text,
+                                                      q1Controller.text,
+                                                      q2Controller.text,
+                                                      q3Controller.text,
+                                                      q4Controller.text,
+                                                      q5Controller.text,
+                                                      q6Controller.text
+
+                                                  );
+                                                },
+                                                    child: Text(
+                                                      'Add', style: TextStyle(fontWeight: FontWeight
+                                                        .bold, fontSize: 20.sp, color: mainColor),)),
+                                              ],),
+                                            SizedBox(height: 30.h,),
+
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                      );
                     }
                 ),
                 SpeedDialChild(
@@ -115,7 +235,7 @@ class CourseDetails extends StatelessWidget {
                         fontSize: 16.sp, fontWeight: FontWeight.bold),
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => ShowLessonsTeacher()));
+                          builder: (context) => ShowLessonsTeacher(id: detailsCoursesTeacherModel!.course!.id,)));
                     }
                 )
               ],
@@ -213,7 +333,19 @@ void AddQustion(BuildContext context) {
                                     fontSize: 20.sp,
                                     color: mainColor),)),
                           SizedBox(width: 10.w,),
-                          TextButton(onPressed: () {},
+                          TextButton(onPressed: (){
+                            CourseTeacherCubit.get(context).addLesson(
+                                detailsCoursesTeacherModel!.course!.id!,
+                                titleController.text,
+                                q1Controller.text,
+                                q2Controller.text,
+                                q3Controller.text,
+                                q4Controller.text,
+                                q5Controller.text,
+                                q6Controller.text
+
+                            );
+                          },
                               child: Text(
                                 'Add', style: TextStyle(fontWeight: FontWeight
                                   .bold, fontSize: 20.sp, color: mainColor),)),

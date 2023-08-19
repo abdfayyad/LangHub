@@ -3,17 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lang_hub/src/util/colors.dart';
 
+import '../data/show_lessons_teacher_model.dart';
 import 'bloc/cubit.dart';
 import 'bloc/status.dart';
 
 class ShowLessonsTeacher extends StatelessWidget {
-  const ShowLessonsTeacher({Key? key}) : super(key: key);
-
+   ShowLessonsTeacher({Key? key ,required this.id}) : super(key: key);
+final int ?id;
+   ShowLessonsTeacherModel? showLessonsTeacherModel;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (BuildContext context) => CourseTeacherCubit(),
+    return BlocProvider(create: (BuildContext context) => CourseTeacherCubit()..getLessons(id!),
       child: BlocConsumer<CourseTeacherCubit, CourseTeacherStatus>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state is ShowLessonsSuccessState)
+            showLessonsTeacherModel=state.showLessonsTeacherModel;
+        },
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
@@ -23,8 +28,8 @@ class ShowLessonsTeacher extends StatelessWidget {
                   fontSize: 24.sp, fontWeight: FontWeight.bold, color: mainColor
               ),),
             ),
-            body: ListView.builder(
-                itemCount: 5,
+            body:showLessonsTeacherModel?.data==0?Center(child: CircularProgressIndicator(),): ListView.builder(
+                itemCount: showLessonsTeacherModel?.data?.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -43,7 +48,7 @@ class ShowLessonsTeacher extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "tomoro I will give you the ant lesson the ant is an small animal",
+                              "${showLessonsTeacherModel!.data?[index].name}",
                               style: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.bold,
@@ -51,7 +56,7 @@ class ShowLessonsTeacher extends StatelessWidget {
                             ),
                             SizedBox(height: 15.h,),
                             Text(
-                              "Q1:What is the ant",
+                              "${showLessonsTeacherModel!.data?[index].title1}",
                               style: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.normal,
@@ -59,7 +64,7 @@ class ShowLessonsTeacher extends StatelessWidget {
                             ),
                             SizedBox(height: 10.h,),
                             Text(
-                              "Q2:Whate is the ant",
+                              "${showLessonsTeacherModel!.data?[index].title2}",
                               style: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.normal,
@@ -67,7 +72,7 @@ class ShowLessonsTeacher extends StatelessWidget {
                             ),
                             SizedBox(height: 10.h,),
                             Text(
-                              "Q3:What is the ant",
+                              "${showLessonsTeacherModel!.data?[index].title3}",
                               style: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.normal,
@@ -75,7 +80,7 @@ class ShowLessonsTeacher extends StatelessWidget {
                             ),
                             SizedBox(height: 10.h,),
                             Text(
-                              "Q4:what is the ant?",
+                              "${showLessonsTeacherModel!.data?[index].title4}",
                               style: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.normal,
@@ -83,7 +88,7 @@ class ShowLessonsTeacher extends StatelessWidget {
                             ),
                             SizedBox(height: 10.h,),
                             Text(
-                              "Q5:What is the ant",
+                              "${showLessonsTeacherModel!.data?[index].title5}",
                               style: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.normal,
@@ -91,7 +96,7 @@ class ShowLessonsTeacher extends StatelessWidget {
                             ),
                             SizedBox(height: 10.h,),
                             Text(
-                              "Q6:what is the ant?",
+                              "${showLessonsTeacherModel!.data?[index].title6}",
                               style: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.normal,

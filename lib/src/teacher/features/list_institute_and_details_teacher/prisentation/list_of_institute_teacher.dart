@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lang_hub/src/teacher/features/list_institute_and_details_teacher/data/all_institute_teacher_model.dart';
 import 'package:lang_hub/src/teacher/features/list_institute_and_details_teacher/prisentation/bloc/cubit.dart';
 import 'package:lang_hub/src/teacher/features/list_institute_and_details_teacher/prisentation/bloc/status.dart';
 import 'package:lang_hub/src/teacher/features/list_institute_and_details_teacher/prisentation/institute_detailsTeacher.dart';
@@ -9,24 +10,27 @@ import 'package:lang_hub/src/teacher/features/list_institute_and_details_teacher
 import '../../../../util/colors.dart';
 
 class ListOfInstituteTeacher extends StatelessWidget {
-  const ListOfInstituteTeacher({Key? key}) : super(key: key);
-
+   ListOfInstituteTeacher({Key? key}) : super(key: key);
+AllInstituteTeacherModel ?allInstituteTeacherModel;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context)=>InstituteTeacherCubit(),
-    child:  BlocConsumer<InstituteTeacherCubit,InstituteDetailsTeacherStatus>(
-      listener: (context,state){},
+      create: (BuildContext context)=>InstituteTeacherCubit()..getListTeacherInstitute(),
+    child:  BlocConsumer<InstituteTeacherCubit,InstituteTeacherStatus>(
+      listener: (context,state){
+        if(state is InstituteTeacherSuccessState)
+          allInstituteTeacherModel=state.allInstituteTeacherModel;
+      },
       builder: (context,state){
         return Scaffold(
-          body:  ListView.builder(
-              itemCount: 10,
+          body: allInstituteTeacherModel?.data==null?Center(child: CircularProgressIndicator(),): ListView.builder(
+              itemCount: allInstituteTeacherModel?.data?.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
                     onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InstituteDetailsTeacher()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InstituteDetailsTeacher(id: allInstituteTeacherModel!.data![index].id,)));
                       // navigateTo(context, CourseDetails());
                     },
                     child: Container(
@@ -42,7 +46,7 @@ class ListOfInstituteTeacher extends StatelessWidget {
                         children: [
                           SizedBox(width: 10.w,),
                           CircleAvatar(
-                            backgroundImage: AssetImage('assets/images/p.png'),
+                            backgroundImage: NetworkImage('${allInstituteTeacherModel!.data![index].photo}'),
                             radius: 45.r,
                           ),
                           Padding(
@@ -51,10 +55,10 @@ class ListOfInstituteTeacher extends StatelessWidget {
                               mainAxisAlignment:MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(' ALTC institue',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp,color: mainColor),),
-                                Text(' English antro a',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp,color: mainColor),),
+                                Text(' ${allInstituteTeacherModel!.data![index].name} ',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp,color: mainColor),),
+                                Text(' ${allInstituteTeacherModel!.data![index].location}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp,color: mainColor),),
                                 RatingBarIndicator(
-                                  rating: 3,
+                                  rating: allInstituteTeacherModel!.data![index].rate!.toDouble(),
                                   itemSize: 25,
                                   //initialRating: 3,
                                   // minRating: 1,

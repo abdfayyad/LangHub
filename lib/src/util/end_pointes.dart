@@ -1,1 +1,2 @@
-const String URL='http://192.168.43.221:8000/api/';
+const String URL='http://192.168.87.221:8000/api/';
+const String URL_IMAGE='http://192.168.87.221:8000/';

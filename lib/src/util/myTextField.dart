@@ -17,6 +17,8 @@ Widget myTextField({
   ValueChanged<String>? onFieldSubmitted,
   Color colorfillColor=fillColorInTextFormField,
   double radios =30,
+  ValueChanged<String>?onChanged
+
 }) =>
     SizedBox(
       height: height,
@@ -26,7 +28,7 @@ Widget myTextField({
         //  style: TextStyle(),
         controller: controller,
         cursorColor: mainColor,
-
+onChanged: onChanged,
         keyboardType: keyboardType,
         onFieldSubmitted: onFieldSubmitted,
         validator: (value) {

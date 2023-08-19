@@ -27,7 +27,7 @@ class HomeTeacher extends StatelessWidget {
                     color: mainColor),
               ),
               //centerTitle: true,
-
+              automaticallyImplyLeading:false,
               backgroundColor: fillColorInTextFormField,
 
               // elevation: 0,

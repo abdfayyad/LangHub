@@ -102,7 +102,10 @@ class DetailsInstituteEnrollmentTeacher extends StatelessWidget {
                                           Navigator.pop(context);
                                         }, child: Text('cancel',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp,color: mainColor),)),
                                         SizedBox(width: 10.w,),
-                                        TextButton(onPressed: (){}, child: Text('Enroll',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp,color: mainColor),)),
+                                        TextButton(onPressed: (){
+
+
+                                        }, child: Text('Enroll',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp,color: mainColor),)),
                                       ],),
 
 

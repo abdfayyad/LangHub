@@ -1,28 +1,34 @@
-class DetailsInstituteTeacherModel {
+class SearchTeacherModel {
   int? status;
   String? message;
-  Data? data;
+  List<SearchTeacher>? searchTeacher;
 
-  DetailsInstituteTeacherModel({this.status, this.message, this.data});
+  SearchTeacherModel({this.status, this.message, this.searchTeacher});
 
-  DetailsInstituteTeacherModel.fromJson(Map<String, dynamic> json) {
+  SearchTeacherModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    if (json['search teacher'] != null) {
+      searchTeacher = <SearchTeacher>[];
+      json['search teacher'].forEach((v) {
+        searchTeacher!.add(new SearchTeacher.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     data['message'] = this.message;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
+    if (this.searchTeacher != null) {
+      data['search teacher'] =
+          this.searchTeacher!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Data {
+class SearchTeacher {
   int? id;
   String? name;
   String? description;
@@ -34,9 +40,12 @@ class Data {
   int? french;
   String? image;
   int? deleteTime;
-  int? rate;
+  int? academyAdminstratorId;
+  String? createdAt;
+  String? updatedAt;
+  dynamic? rate;
 
-  Data(
+  SearchTeacher(
       {this.id,
         this.name,
         this.description,
@@ -48,9 +57,12 @@ class Data {
         this.french,
         this.image,
         this.deleteTime,
+        this.academyAdminstratorId,
+        this.createdAt,
+        this.updatedAt,
         this.rate});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  SearchTeacher.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
@@ -62,6 +74,9 @@ class Data {
     french = json['french'];
     image = json['image'];
     deleteTime = json['delete_time'];
+    academyAdminstratorId = json['academy_adminstrator_id'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
     rate = json['rate'];
   }
 
@@ -78,6 +93,9 @@ class Data {
     data['french'] = this.french;
     data['image'] = this.image;
     data['delete_time'] = this.deleteTime;
+    data['academy_adminstrator_id'] = this.academyAdminstratorId;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
     data['rate'] = this.rate;
     return data;
   }

@@ -6,23 +6,29 @@ import 'package:lang_hub/src/teacher/features/list_of_student_and_details_teache
 import 'package:lang_hub/src/teacher/features/list_of_student_and_details_teacher/prisentation/students_in_teacher.dart';
 
 import '../../../../util/colors.dart';
+import '../../list_of_courses_and_details_teacher/data/all_courses_teacher_model.dart';
 
 class ListOfStudentTeacher extends StatelessWidget {
-  const ListOfStudentTeacher({Key? key}) : super(key: key);
+   ListOfStudentTeacher({Key? key}) : super(key: key);
+  AllCoursesTeacherModel ?allCoursesTeacherModel;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (BuildContext context)=>StudentInTeacherCubit(),
+    return BlocProvider(create: (BuildContext context)=>StudentInTeacherCubit()..getAllCourses(),
     child: BlocConsumer<StudentInTeacherCubit,StudentInTeacherState>(
-      listener: (context,state){},
+      listener: (context,state){
+        if(state is StudentInTeacherSuccessState)
+          allCoursesTeacherModel=state.allCoursesTeacherModel;
+
+      },
       builder: (context,state){
         return Scaffold(
-          body:  ListView.builder(
-              itemCount: 10,
+          body:allCoursesTeacherModel?.courses==null?Center(child: CircularProgressIndicator(),):  ListView.builder(
+              itemCount: allCoursesTeacherModel?.courses?.length,
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
                   onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>StudentsDetailsInTeacher()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>StudentsDetailsInTeacher(id: allCoursesTeacherModel!.courses?[index].id,)));
                     // navigateTo(context, CourseDetails());
                   },
                   child: Container(
@@ -41,7 +47,7 @@ class ListOfStudentTeacher extends StatelessWidget {
                       children: [
                         SizedBox(width: 10.w,),
                         CircleAvatar(
-                          backgroundImage: AssetImage('assets/images/p.png'),
+                          backgroundImage: AssetImage('${allCoursesTeacherModel!.courses?[index].courseImage}'),
                           radius: 45.r,
                         ),
                         Padding(
@@ -50,8 +56,8 @@ class ListOfStudentTeacher extends StatelessWidget {
                             mainAxisAlignment:MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(' antro a',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp,color: mainColor),),
-                              Text(' 15 student',style: TextStyle(fontWeight: FontWeight.normal,fontSize: 16.sp,color: mainColor),),
+                              Text(' ${allCoursesTeacherModel!.courses?[index].name}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp,color: mainColor),),
+                              Text(' ${allCoursesTeacherModel!.courses?[index].studentNumber}',style: TextStyle(fontWeight: FontWeight.normal,fontSize: 16.sp,color: mainColor),),
 
                             ],
                           ),
@@ -63,7 +69,7 @@ class ListOfStudentTeacher extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(' ALTC institue',style: TextStyle(fontWeight: FontWeight.normal,fontSize: 16.sp,color: mainColor),),
+                                Text(' ${allCoursesTeacherModel!.courses?[index].academyName}',style: TextStyle(fontWeight: FontWeight.normal,fontSize: 16.sp,color: mainColor),),
                               ],
                             ),
                           ),

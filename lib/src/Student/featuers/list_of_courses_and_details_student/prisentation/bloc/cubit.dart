@@ -59,6 +59,46 @@ class CourseStudentCubit extends Cubit<CourseStudentStatus>{
       throw Exception('Failed to load profile data');
     }
   }
+  ///get details course student----------------------------
+  // Future<ShowCoursesAndOffersModel?> getDetailsCourse() async {
+  //   final headers = {
+  //     'Accept': 'application/json',
+  //     'Authorization': 'Bearer ${SharedPref.getData(key: 'token')}', // Replace with your header key and value
+  //   };
+  //   final response = await http.get(
+  //       Uri.parse('${URL}student/offers/ten'),headers: headers);
+  //
+  //   if (response.statusCode == 200) {
+  //     print("ten  offers success");
+  //     print(response.body);
+  //     final parsedJson = jsonDecode(response.body);
+  //     print(response.body);
+  //     showTenOffersModel= ShowTenOffersModel.fromJson(parsedJson);
+  //     print(showTenOffersModel!.message);
+  //     emit(TenOffersSuccessState(showTenOffersModel!));
+  //   }else {
+  //     print("ten offers  field");
+  //     emit(TenOffersErrorState());
+  //     throw Exception('Failed to load profile data');
+  //   }
+  // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   ///solve exam-------------------------------------------------
 //   Future<void> solveExam(String email, String password) async {
 //     // Define the API endpoint URL

@@ -22,7 +22,7 @@ class LoginScreenCubit extends Cubit<LoginScreenStatus>{
     final url = Uri.parse('${URL}login');
 
     // Create a map with the request data
-    final data = {'email': 'ahm@gmail.com', 'password': 'password'};
+    final data = {'email': email, 'password': password};
 
     try {
       print("tryyy");

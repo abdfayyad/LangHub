@@ -6,9 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lang_hub/src/Student/featuers/profile_student_management/prisentation/bloc/cubit.dart';
+import 'package:lang_hub/src/teacher/features/profile_teacher_management/data/profile_teacher_model.dart';
 import 'package:lang_hub/src/teacher/features/profile_teacher_management/prisentation/bloc/cubit.dart';
 import 'package:lang_hub/src/teacher/features/profile_teacher_management/prisentation/bloc/status.dart';
+import 'package:lang_hub/src/teacher/features/profile_teacher_management/prisentation/edit_profil_teacher.dart';
 import 'package:lang_hub/src/util/colors.dart';
+import 'package:lang_hub/src/util/end_pointes.dart';
 import 'package:lang_hub/src/util/myTextField.dart';
 
 import '../../../../util/defaultbutton.dart';
@@ -46,17 +49,21 @@ class _ProfileTeacherState extends State<ProfileTeacher>
       });
     }
   }
+  ProfileTeacherModel? profileTeacherModel;
   @override
   Widget build(BuildContext context) {
     var addPostController=TextEditingController();
-    return BlocProvider(create: (BuildContext context)=>ProfileTeacherCubit(),
+    return BlocProvider(create: (BuildContext context)=>ProfileTeacherCubit()..getProfileInfo(),
     child: BlocConsumer<ProfileTeacherCubit,ProfileTeacherStatus>(
-      listener: (context,state){},
+      listener: (context,state){
+        if(state is ProfileTeacherSuccessState)
+          profileTeacherModel=state.profileTeacherModel;
+      },
       builder: (context,state){
         return Scaffold(
           //backgroundColor: Colors.white,
           extendBodyBehindAppBar: true,
-          body: SafeArea(
+          body:profileTeacherModel?.data==null?Center(child: CircularProgressIndicator(),): SafeArea(
             child: Stack(
               children: [
                 DefaultTabController(
@@ -65,29 +72,32 @@ class _ProfileTeacherState extends State<ProfileTeacher>
                     headerSliverBuilder: (context, value) {
                       return [
                         SliverAppBar(
+                          automaticallyImplyLeading: false,
                             floating: true,
                             pinned: true,
                             snap: true,
+                            elevation: 0.4,
                             //elevation: 70,
-                            collapsedHeight:80,
+                            collapsedHeight:60,
                             expandedHeight: 400.0,
-                            title: IconButton(icon: Icon(Icons.edit),onPressed: (){
-                              // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>pdfViewerPage()));
+                            backgroundColor: fillColorInTextFormField,
+                            title: IconButton(icon: Icon(Icons.edit,color: mainColor,),onPressed: (){
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>EditProfileTeacher()));
                             },),
                             flexibleSpace: FlexibleSpaceBar(
 
-                              title: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(height: 15.h),
-                                  Text('abd fayyad'),
-                                  SizedBox(height: 5.h),
-                                  Text('abd fayyad',style: TextStyle(fontSize: 14.sp),),
-                                ],
-                              ),
+                              // title: Column(
+                              //   crossAxisAlignment: CrossAxisAlignment.start,
+                              //   children: [
+                              //     SizedBox(height: 15.h),
+                              //     Text('abd fayyad'),
+                              //     SizedBox(height: 5.h),
+                              //     Text('abd fayyad',style: TextStyle(fontSize: 14.sp),),
+                              //   ],
+                              // ),
 
                               background: Image(
-                                image: AssetImage('assets/images/login.png'),
+                                image: AssetImage('${profileTeacherModel!.data!.photo}'),
                                 fit: BoxFit.fill,
                               ) ,
                             )
@@ -104,8 +114,8 @@ class _ProfileTeacherState extends State<ProfileTeacher>
                         SliverPersistentHeader(
                           pinned: true,
                           delegate: _SliverAppBarDelegate(
-                            minHeight: 90,
-                            maxHeight: 90,
+                            minHeight: 160,
+                            maxHeight: 160,
                             child: Container(
                                 height: getHeight() * (1 / 11),
                                 width: double.infinity,
@@ -114,9 +124,14 @@ class _ProfileTeacherState extends State<ProfileTeacher>
                                   padding: const EdgeInsets.all(10.0),
                                   child: Column(
                                     children: [
+                                      Text("${profileTeacherModel!.data!.firstName } ${profileTeacherModel!.data!.lastName } ",style: TextStyle(color: mainColor,fontSize: 20.sp,fontWeight: FontWeight.bold),),
+                                      SizedBox(height: 10.h,),
+                                      Text("${profileTeacherModel!.data!.email } ",style: TextStyle(color: mainColor,fontSize: 18.sp,fontWeight: FontWeight.normal),) ,
+                                      SizedBox(height: 5.h,),
+                                      Divider(),
                                       Text("phone number",style: TextStyle(color: mainColor,fontSize: 20.sp,fontWeight: FontWeight.bold),),
                                       SizedBox(height: 10.h,),
-                                      Text("+9630936854125",style: TextStyle(color: mainColor,fontSize: 18.sp,fontWeight: FontWeight.normal),)
+                                      Text("${profileTeacherModel!.data!.phoneNumber } ",style: TextStyle(color: mainColor,fontSize: 18.sp,fontWeight: FontWeight.normal),)
                                     ],
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                   ),
@@ -149,110 +164,8 @@ class _ProfileTeacherState extends State<ProfileTeacher>
                         ),
                       ];
                     },
-                    // body: TabBarView(
-                    //   controller: _tabController,
-                    //   children: [
-                    //     SingleChildScrollView(
-                    //       child: Container(
-                    //         padding: EdgeInsets.only(bottom: 600),
-                    //         child: Column(
-                    //           children: [
-                    //             // RoundedPicture(),
-                    //             Icon(
-                    //               Icons.favorite,
-                    //               color: Colors.pink,
-                    //               size: 150.0,
-                    //               semanticLabel:
-                    //               'Text to announce in accessibility modes',
-                    //             ),
-                    //             FittedBox(
-                    //               child: Text("Hello World",
-                    //                   style: TextStyle(
-                    //                       fontWeight: FontWeight.bold,
-                    //                       color: Colors.black,
-                    //                       fontSize: 40)),
-                    //             ),
-                    //             SizedBox(
-                    //               height: 20,
-                    //             ),
-                    //             Column(
-                    //               crossAxisAlignment: CrossAxisAlignment.start,
-                    //               children: [
-                    //                 RichText(
-                    //                   text: TextSpan(
-                    //                       style: TextStyle(
-                    //                           fontWeight: FontWeight.bold,
-                    //                           color: Colors.black,
-                    //                           fontSize: 20),
-                    //                       text: 'Info1:  ',
-                    //                       children: [
-                    //                         TextSpan(
-                    //                           text: "123",
-                    //                           style: TextStyle(),
-                    //                         ),
-                    //                       ]),
-                    //                 ),
-                    //                 SizedBox(
-                    //                   height: 20,
-                    //                 ),
-                    //                 RichText(
-                    //                   text: TextSpan(
-                    //                       style: TextStyle(
-                    //                           fontWeight: FontWeight.bold,
-                    //                           color: Colors.black,
-                    //                           fontSize: 20),
-                    //                       text: 'Info2:  ',
-                    //                       children: [
-                    //                         TextSpan(
-                    //                           text: "abcd",
-                    //                           style: TextStyle(),
-                    //                         ),
-                    //                       ]),
-                    //                 ),
-                    //                 SizedBox(
-                    //                   height: 20,
-                    //                 ),
-                    //                 RichText(
-                    //                   text: TextSpan(
-                    //                       style: TextStyle(
-                    //                           fontWeight: FontWeight.bold,
-                    //                           color: Colors.black,
-                    //                           fontSize: 20),
-                    //                       text: 'Info3:  ',
-                    //                       children: [
-                    //                         TextSpan(
-                    //                           text: "xyz",
-                    //                           style: TextStyle(),
-                    //                         ),
-                    //                       ]),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     SingleChildScrollView(
-                    //       child: Container(
-                    //         padding: EdgeInsets.only(bottom: 600),
-                    //         child: Column(
-                    //           children: [
-                    //             Container(
-                    //               padding: EdgeInsets.only(bottom: 600),
-                    //               child: Center(
-                    //                 child: Text("TITLE2"),
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //     ),
-                    //
-                    //
-                    //   ],
-                    // ),
-                    body:  ListView.builder(
-                        itemCount: 5,
+                    body:profileTeacherModel!.data!.posts==null?Center(child: CircularProgressIndicator(),):  ListView.builder(
+                        itemCount: profileTeacherModel!.data!.posts!.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -276,15 +189,14 @@ class _ProfileTeacherState extends State<ProfileTeacher>
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text("my cv",style: TextStyle(color: mainColor,fontSize: 20.sp,fontWeight: FontWeight.normal),),
+                                        child: Text("${profileTeacherModel!.data!.posts![index].title}",style: TextStyle(color: mainColor,fontSize: 20.sp,fontWeight: FontWeight.normal),),
                                       ),
-
                                       Container(
                                         width: double.infinity,
                                         height:300,
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
-                                            image: AssetImage('assets/images/p.jpg'),
+                                            image: NetworkImage('$URL_IMAGE${profileTeacherModel!.data!.posts![index].image}'),
                                             fit: BoxFit.fill,
                                           ),
                                         ),
