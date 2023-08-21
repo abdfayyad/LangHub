@@ -36,7 +36,7 @@ class SearchTeacherCubit extends Cubit<SearchTeacherStatus>{
       if (response.statusCode == 200) {
 
         // Request successful, do something with the response
-        print('Login successful');
+        print('Search Teacher successful');
         print(response.body);
         final responseData = jsonDecode(response.body);
         // return UserModel.fromJson(responseData);

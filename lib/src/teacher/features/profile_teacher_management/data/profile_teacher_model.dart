@@ -28,7 +28,7 @@ class Data {
   String? firstName;
   String? lastName;
   String? phoneNumber;
-  Null? photo;
+  String? photo;
   String? email;
   List<Posts>? posts;
 

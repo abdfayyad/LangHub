@@ -1,17 +1,17 @@
-class SearchTeacherModel {
+class SearchOfferStudentModel {
   int? status;
   String? message;
-  List<SearchTeacher>? searchTeacher;
+  List<Data>? data;
 
-  SearchTeacherModel({this.status, this.message, this.searchTeacher});
+  SearchOfferStudentModel({this.status, this.message, this.data});
 
-  SearchTeacherModel.fromJson(Map<String, dynamic> json) {
+  SearchOfferStudentModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    if (json['search teacher'] != null) {
-      searchTeacher = <SearchTeacher>[];
-      json['search teacher'].forEach((v) {
-        searchTeacher!.add(new SearchTeacher.fromJson(v));
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(new Data.fromJson(v));
       });
     }
   }
@@ -20,15 +20,70 @@ class SearchTeacherModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     data['message'] = this.message;
-    if (this.searchTeacher != null) {
-      data['search teacher'] =
-          this.searchTeacher!.map((v) => v.toJson()).toList();
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class SearchTeacher {
+class Data {
+  int? id;
+  String? name;
+  int? price;
+  String? hours;
+  String? startDate;
+  String? endDate;
+  String? description;
+  String? image;
+  int? seats;
+  Academy? academy;
+
+  Data(
+      {this.id,
+        this.name,
+        this.price,
+        this.hours,
+        this.startDate,
+        this.endDate,
+        this.description,
+        this.image,
+        this.seats,
+        this.academy});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    price = json['price'];
+    hours = json['hours'];
+    startDate = json['start_date'];
+    endDate = json['end_date'];
+    description = json['description'];
+    image = json['image'];
+    seats = json['seats'];
+    academy =
+    json['academy'] != null ? new Academy.fromJson(json['academy']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['price'] = this.price;
+    data['hours'] = this.hours;
+    data['start_date'] = this.startDate;
+    data['end_date'] = this.endDate;
+    data['description'] = this.description;
+    data['image'] = this.image;
+    data['seats'] = this.seats;
+    if (this.academy != null) {
+      data['academy'] = this.academy!.toJson();
+    }
+    return data;
+  }
+}
+
+class Academy {
   int? id;
   String? name;
   String? description;
@@ -43,9 +98,8 @@ class SearchTeacher {
   int? academyAdminstratorId;
   String? createdAt;
   String? updatedAt;
-  dynamic ? rate;
 
-  SearchTeacher(
+  Academy(
       {this.id,
         this.name,
         this.description,
@@ -59,10 +113,9 @@ class SearchTeacher {
         this.deleteTime,
         this.academyAdminstratorId,
         this.createdAt,
-        this.updatedAt,
-        this.rate});
+        this.updatedAt});
 
-  SearchTeacher.fromJson(Map<String, dynamic> json) {
+  Academy.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
@@ -77,7 +130,6 @@ class SearchTeacher {
     academyAdminstratorId = json['academy_adminstrator_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    rate = json['rate'];
   }
 
   Map<String, dynamic> toJson() {
@@ -96,7 +148,6 @@ class SearchTeacher {
     data['academy_adminstrator_id'] = this.academyAdminstratorId;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
-    data['rate'] = this.rate;
     return data;
   }
 }

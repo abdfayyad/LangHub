@@ -1,17 +1,17 @@
-class SearchTeacherModel {
+class SearchInstituteStudentModel {
   int? status;
   String? message;
-  List<SearchTeacher>? searchTeacher;
+  List<Data>? data;
 
-  SearchTeacherModel({this.status, this.message, this.searchTeacher});
+  SearchInstituteStudentModel({this.status, this.message, this.data});
 
-  SearchTeacherModel.fromJson(Map<String, dynamic> json) {
+  SearchInstituteStudentModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    if (json['search teacher'] != null) {
-      searchTeacher = <SearchTeacher>[];
-      json['search teacher'].forEach((v) {
-        searchTeacher!.add(new SearchTeacher.fromJson(v));
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(new Data.fromJson(v));
       });
     }
   }
@@ -20,15 +20,14 @@ class SearchTeacherModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     data['message'] = this.message;
-    if (this.searchTeacher != null) {
-      data['search teacher'] =
-          this.searchTeacher!.map((v) => v.toJson()).toList();
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class SearchTeacher {
+class Data {
   int? id;
   String? name;
   String? description;
@@ -43,9 +42,8 @@ class SearchTeacher {
   int? academyAdminstratorId;
   String? createdAt;
   String? updatedAt;
-  dynamic ? rate;
 
-  SearchTeacher(
+  Data(
       {this.id,
         this.name,
         this.description,
@@ -59,10 +57,9 @@ class SearchTeacher {
         this.deleteTime,
         this.academyAdminstratorId,
         this.createdAt,
-        this.updatedAt,
-        this.rate});
+        this.updatedAt});
 
-  SearchTeacher.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
@@ -77,7 +74,6 @@ class SearchTeacher {
     academyAdminstratorId = json['academy_adminstrator_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    rate = json['rate'];
   }
 
   Map<String, dynamic> toJson() {
@@ -96,7 +92,6 @@ class SearchTeacher {
     data['academy_adminstrator_id'] = this.academyAdminstratorId;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
-    data['rate'] = this.rate;
     return data;
   }
 }

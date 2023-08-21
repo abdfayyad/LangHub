@@ -2,26 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lang_hub/src/Student/featuers/search_and_enrollment_student/data/search_institute_student_mode.dart';
+import 'package:lang_hub/src/Student/featuers/search_and_enrollment_student/data/search_offer_student_model.dart';
 import 'package:lang_hub/src/Student/featuers/search_and_enrollment_student/prisentation/bloc/cubit.dart';
 import 'package:lang_hub/src/Student/featuers/search_and_enrollment_student/prisentation/bloc/status.dart';
 import 'package:lang_hub/src/Student/featuers/search_and_enrollment_student/prisentation/details_institute_enrollment.dart';
 import 'package:lang_hub/src/Student/featuers/search_and_enrollment_student/prisentation/details_offers_enrollment.dart';
 import 'package:lang_hub/src/util/colors.dart';
 import 'package:lang_hub/src/util/myTextField.dart';
+import 'package:lang_hub/src/util/show_message_on_screen.dart';
 
 import '../widget/toggel_bottun_for_search.dart';
 
 class SearchStudent extends StatelessWidget {
   SearchStudent({Key? key}) : super(key: key);
-
+SearchOfferStudentModel ?searchOfferStudentModel;
+SearchInstituteStudentModel ? searchInstituteStudentModel;
   @override
   Widget build(BuildContext context) {
-    int valueOfSearch = 1;
     var searchController = new TextEditingController();
     return BlocProvider<SearchStudentCubit>(
       create: (BuildContext context) => SearchStudentCubit(),
       child: BlocConsumer<SearchStudentCubit, SearchStudentStatus>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state is SearchStudentInstituteSuccessState)
+            searchInstituteStudentModel=state.searchInstituteStudentModel;
+         else if(state is SearchStudentOfferSuccessState)
+            searchOfferStudentModel=state.searchOfferStudentModel;
+         else
+           showMessageOnScreen(context: context, titleText: "Error", messageText: "thr are an error");
+        },
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
@@ -48,7 +58,14 @@ class SearchStudent extends StatelessWidget {
                         Icons.search,
                         color: mainColor,
                       ),
-                      onFieldSubmitted: (String query) {}),
+                      onChanged: (String query) {
+                        if(SearchStudentCubit.get(context).cc==1)
+                          {
+                            SearchStudentCubit.get(context).searchForInstitute(query);
+                          }else if(SearchStudentCubit.get(context).cc==2){
+                          SearchStudentCubit.get(context).searchForOffer(query);
+                        }
+                      }),
                   SizedBox(
                     height: 15.h,
                   ),
@@ -78,8 +95,8 @@ class SearchStudent extends StatelessWidget {
                   ),
                   BlocProvider.of<SearchStudentCubit>(context).cc == 1
                       ? Expanded(
-                          child: ListView.builder(
-                              itemCount: 10,
+                          child:searchInstituteStudentModel?.data==null?Center(child: CircularProgressIndicator(),): ListView.builder(
+                              itemCount: searchInstituteStudentModel?.data!.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -168,8 +185,8 @@ class SearchStudent extends StatelessWidget {
                               }),
                         )
                       : Expanded(
-                          child: ListView.builder(
-                              itemCount: 10,
+                          child:searchOfferStudentModel?.data==null?Center(child: CircularProgressIndicator(),): ListView.builder(
+                              itemCount: searchOfferStudentModel!.data!.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -179,7 +196,7 @@ class SearchStudent extends StatelessWidget {
                                       print(BlocProvider.of<SearchStudentCubit>(
                                               context)
                                           .cc);
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailsOffersEnrollment()));
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailsOffersEnrollment(data:searchOfferStudentModel!.data![index]!)));
 
                                     },
                                     child: Container(
@@ -201,8 +218,8 @@ class SearchStudent extends StatelessWidget {
                                                 color: fillColorInTextFormField,
                                                 image: DecorationImage(
                                                     fit: BoxFit.cover,
-                                                    image: AssetImage(
-                                                      'assets/images/p.png',
+                                                    image: NetworkImage(
+                                                      '${searchOfferStudentModel!.data![index].image}',
                                                     )),
                                                 borderRadius:
                                                     BorderRadius.circular(10.r),
@@ -218,7 +235,7 @@ class SearchStudent extends StatelessWidget {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  ' ALTC institue',
+                                                  ' ${searchOfferStudentModel!.data![index].name}',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -226,7 +243,7 @@ class SearchStudent extends StatelessWidget {
                                                       color: mainColor),
                                                 ),
                                                 Text(
-                                                  ' English antro a',
+                                                  ' ${searchOfferStudentModel!.data![index].academy!.name}',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -234,7 +251,7 @@ class SearchStudent extends StatelessWidget {
                                                       color: mainColor),
                                                 ),
                                                 Text(
-                                                  ' 50\$',
+                                                  ' ${searchOfferStudentModel!.data![index].price}\$',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.normal,
@@ -242,7 +259,7 @@ class SearchStudent extends StatelessWidget {
                                                       color: mainColor),
                                                 ),
                                                 Text(
-                                                  ' 2020\\10\\10',
+                                                  ' ${searchOfferStudentModel!.data![index].startDate}',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.normal,

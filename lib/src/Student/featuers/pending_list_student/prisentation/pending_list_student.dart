@@ -11,7 +11,7 @@ class PendingListStudent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (BuildContext context)=>PendingListStudentCubit(),
+    return BlocProvider(create: (BuildContext context)=>PendingListStudentCubit()..getPendingList(),
     child: BlocConsumer<PendingListStudentCubit,PendingListStudentStatus>(
       listener: (context,state){
 

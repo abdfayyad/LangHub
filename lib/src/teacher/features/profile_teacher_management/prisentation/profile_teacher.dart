@@ -15,6 +15,7 @@ import 'package:lang_hub/src/util/end_pointes.dart';
 import 'package:lang_hub/src/util/myTextField.dart';
 
 import '../../../../util/defaultbutton.dart';
+import '../../../../util/show_message_on_screen.dart';
 
 class ProfileTeacher extends StatefulWidget {
 
@@ -58,7 +59,30 @@ class _ProfileTeacherState extends State<ProfileTeacher>
       listener: (context,state){
         if(state is ProfileTeacherSuccessState)
           profileTeacherModel=state.profileTeacherModel;
-      },
+      if(state is DeletePostProfileTeacherSuccessState)
+        {
+          showMessageOnScreen(
+              context: context,
+              titleText: "Done",
+              messageText: "deleted successfully ",
+              backgroundColor: Colors.green,
+              titleColor: Colors.white,
+              messageColor: Colors.white);
+          ProfileTeacherCubit.get(context).getProfileInfo();
+        }
+        if(state is AddPostProfileTeacherSuccessState)
+        {
+          showMessageOnScreen(
+              context: context,
+              titleText: "Done",
+              messageText: "Add post  successfully ",
+              backgroundColor: Colors.green,
+              titleColor: Colors.white,
+              messageColor: Colors.white);
+            ProfileTeacherCubit.get(context).getProfileInfo();
+
+        }
+        },
       builder: (context,state){
         return Scaffold(
           //backgroundColor: Colors.white,
@@ -82,7 +106,7 @@ class _ProfileTeacherState extends State<ProfileTeacher>
                             expandedHeight: 400.0,
                             backgroundColor: fillColorInTextFormField,
                             title: IconButton(icon: Icon(Icons.edit,color: mainColor,),onPressed: (){
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>EditProfileTeacher()));
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>EditProfileTeacher(profileTeacherModel: profileTeacherModel,)));
                             },),
                             flexibleSpace: FlexibleSpaceBar(
 
@@ -97,7 +121,7 @@ class _ProfileTeacherState extends State<ProfileTeacher>
                               // ),
 
                               background: Image(
-                                image: AssetImage('${profileTeacherModel!.data!.photo}'),
+                                image: NetworkImage('$URL_IMAGE${profileTeacherModel!.data!.photo}'),
                                 fit: BoxFit.fill,
                               ) ,
                             )
@@ -189,11 +213,19 @@ class _ProfileTeacherState extends State<ProfileTeacher>
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text("${profileTeacherModel!.data!.posts![index].title}",style: TextStyle(color: mainColor,fontSize: 20.sp,fontWeight: FontWeight.normal),),
+                                        child: Row(
+                                          children: [
+                                            Expanded(child: Text("${profileTeacherModel!.data!.posts![index].title}",style: TextStyle(color: mainColor,fontSize: 20.sp,fontWeight: FontWeight.normal),)),
+                                         IconButton(onPressed: (){
+                                           ProfileTeacherCubit.get(context).deletePost(profileTeacherModel!.data!.posts![index].id!);
+
+                                         }, icon: Icon(Icons.delete))
+                                          ],
+                                        ),
                                       ),
                                       Container(
                                         width: double.infinity,
-                                        height:300,
+                                        height:240,
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                             image: NetworkImage('$URL_IMAGE${profileTeacherModel!.data!.posts![index].image}'),
@@ -214,10 +246,10 @@ class _ProfileTeacherState extends State<ProfileTeacher>
             ),
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () {
+            onPressed: (){
               showDialog(
                   context: context,
-                  builder: (BuildContext context) => Center(
+                  builder: (BuildContext ccontext) => Center(
                     child: Dialog(
                       backgroundColor: fillColorInTextFormField,
                       shape: RoundedRectangleBorder(
@@ -255,7 +287,7 @@ class _ProfileTeacherState extends State<ProfileTeacher>
                                   height: 5.h,
                                 ),
                                 InkWell(
-                                  onTap: ()=>_pickImage(ImageSource.gallery),
+                                  onTap: () => _pickImage(ImageSource.gallery),
                                   child: Container(
                                     width: double.infinity,
                                     height: 200,
@@ -283,7 +315,11 @@ class _ProfileTeacherState extends State<ProfileTeacher>
                                       width: 10.w,
                                     ),
                                     TextButton(
-                                        onPressed: () {},
+                                        onPressed: ()async {
+                                          ProfileTeacherCubit.get(context).addPost(addPostController.text,_image! );
+                                          await Future.delayed(Duration(seconds: 1));
+                                          Navigator.pop(context);
+                                        },
                                         child: Text(
                                           'Add',
                                           style: TextStyle(
@@ -339,5 +375,38 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     return maxHeight != oldDelegate.maxHeight ||
         minHeight != oldDelegate.minHeight ||
         child != oldDelegate.child;
+  }
+}
+class Showww extends StatefulWidget {
+   Showww({Key? key,required this.widget}) : super(key: key);
+Widget widget;
+  @override
+  State<Showww> createState() => _ShowwwState();
+}
+
+class _ShowwwState extends State<Showww> {
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Dialog(
+        backgroundColor: fillColorInTextFormField,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0)),
+        //this right here
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            height: 400.h,
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: widget,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

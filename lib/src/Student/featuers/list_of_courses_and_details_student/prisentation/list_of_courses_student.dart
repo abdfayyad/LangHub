@@ -68,7 +68,7 @@ class ListOfCoursesStudent extends StatelessWidget {
                       builder: (BuildContext context) {
                         return InkWell(
                           onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsOffersEnrollment()));
+                           // Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsOffersEnrollment()));
                           }
                           ,
 

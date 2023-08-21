@@ -223,7 +223,7 @@ class CourseDetails extends StatelessWidget {
                         fontSize: 16.sp, fontWeight: FontWeight.bold),
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => DegreeTrackerApp()));
+                          builder: (context) => StudentList()));
                     }
                 ),
                 SpeedDialChild(

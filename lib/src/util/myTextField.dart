@@ -67,5 +67,7 @@ onChanged: onChanged,
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30.0),
                 borderSide: BorderSide(color: Color(0xFF210440),)
-)))
+)
+        )
+      )
     );

@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lang_hub/src/Student/featuers/profile_student_management/data/profile_model.dart';
 import 'package:lang_hub/src/Student/featuers/profile_student_management/prisentation/bloc/status.dart';
 import 'package:http/http.dart'as http;
@@ -10,7 +12,7 @@ import '../../../../../util/shared_preferences.dart';
 import '../../data/show_certificate_model.dart';
 class ProfileStudentCubit extends Cubit<ProfileStudentStatus>{
   ProfileStudentCubit():super(ProfileStudentInitialState());
-
+static ProfileStudentCubit get(context)=>BlocProvider.of(context);
   ///git profile data
  ProfileStudentModel? profileStudentModel;
   Future<Map<String, dynamic>> getProfileData() async {
@@ -58,7 +60,40 @@ ShowCertificateModel ?showCertificateModel;
     }
   }
    ///edit profile student -------------------------------
+  Future<void> updateProfile(
+      String? name,
+      String ?email,
+      String? phone,
+      File ?imageFile,
+      ) async {
+    String url = '${URL}student/profile'; // Replace with your API URL
 
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+    request.fields['name'] = name!;
+    request.fields['email'] = email!;
+    request.fields['phone'] = phone!;
+
+    if (imageFile != null) {
+      request.files.add(http.MultipartFile(
+        'image',
+        imageFile.readAsBytes().asStream(),
+        imageFile.lengthSync(),
+        filename: imageFile.path.split('/').last,
+      ));
+    }
+
+    var response = await request.send();
+    emit(EditProfileStudentLoadingState());
+    if (response.statusCode == 200) {
+      print('Upload success');
+
+      // final parsedJson = jsonDecode(response);
+      emit(EditProfileStudentSuccessState());
+    } else {
+      emit(EditProfileStudentErrorState());
+      print('Upload failed');
+    }
+  }
 
 
    ///change password----------------------------------
@@ -68,11 +103,11 @@ ShowCertificateModel ?showCertificateModel;
       'Authorization': 'Bearer ${SharedPref.getData(key: 'token')}', // Replace with your header key and value
     };
     // Define the API endpoint URL
-    final url = Uri.parse('${URL}login');
+    final url = Uri.parse('${URL}student/profile/change-password');
 
     // Create a map with the request data
     final data = {
-      'old_password': oldPassword,
+      'current_password': oldPassword,
       'new_password': newPassword};
 
     try {
@@ -82,7 +117,7 @@ ShowCertificateModel ?showCertificateModel;
       // Check if the request was successful
       if (response.statusCode == 200) {
         // Request successful, do something with the response
-        print('Login successful');
+        print('change password successful');
         print(response.body);
         final responseData = jsonDecode(response.body);
         // return UserModel.fromJson(responseData);

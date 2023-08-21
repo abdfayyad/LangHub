@@ -19,7 +19,10 @@ void main() async{
 
   runApp(const MyApp());
 }
-
+final List<Student> students = [
+  Student(id: 1, name: "John", email: "john@example.com", phone: "123-456-7890"),
+  Student(id: 2, name: "Alice", email: "alice@example.com", phone: "987-654-3210"),
+];
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -38,6 +41,6 @@ class MyApp extends StatelessWidget {
             home: child,
           );
         },
-        child: Login());
+        child: StudentList());
   }
 }
