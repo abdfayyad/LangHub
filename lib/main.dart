@@ -41,6 +41,6 @@ class MyApp extends StatelessWidget {
             home: child,
           );
         },
-        child: StudentList());
+        child: HomeStudent());
   }
 }

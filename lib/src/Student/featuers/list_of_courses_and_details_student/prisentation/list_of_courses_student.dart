@@ -115,7 +115,7 @@ class ListOfCoursesStudent extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ListView.builder(
+                    child:showCoursesAndOffersModel?.data==null?Center(child: CircularProgressIndicator(),): ListView.builder(
                         itemCount:showCoursesAndOffersModel?.data?.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(

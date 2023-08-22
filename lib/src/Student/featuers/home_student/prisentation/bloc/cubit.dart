@@ -13,7 +13,7 @@ import '../../../notification_student_management/prisentation/notification_stude
 class HomeStudentCubit extends Cubit<HomeStudentStates>{
   HomeStudentCubit():super(HomeInitialState());
   static HomeStudentCubit get(context)=>BlocProvider.of(context);
-  int currentIndex = 2;
+  int currentIndex = 3;
 
   List<Widget> screen = [
 
