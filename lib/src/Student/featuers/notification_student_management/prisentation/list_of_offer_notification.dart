@@ -50,8 +50,8 @@ class ListOfOffersNotification extends StatelessWidget {
                 )
               ],
             ),
-            body: ListView.builder(
-                itemCount: 5,
+            body:listAcceptOfferNotificationModel?.message==null?Center(child: CircularProgressIndicator(),): ListView.builder(
+                itemCount: listAcceptOfferNotificationModel?.data?.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -194,7 +194,7 @@ class ListOfOffersNotification extends StatelessWidget {
                             )),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text("${listAcceptOfferNotificationModel!.data![index].title}",
+                          child: Text("${listAcceptOfferNotificationModel!.data?[index].title}",
                               style: TextStyle(
                                   color: mainColor,
                                   fontSize: 20.sp,

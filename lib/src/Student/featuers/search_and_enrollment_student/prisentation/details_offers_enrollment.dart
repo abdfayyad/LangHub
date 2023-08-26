@@ -17,7 +17,7 @@ class DetailsOffersEnrollment extends StatelessWidget {
    DetailsOffersEnrollment({Key? key,required this.data}) : super(key: key);
   final String description =
       "Flutter is Google’s mobile UI framework for crafting high-quality native interfaces on iOS and Android in record time. Flutter works with existing code, is used by developers and organizations around the world, and is free and open source. have a question , how can I put the show more behind the text , I mean it looks like this Flutter is Google’s mobile UI framework for... show more,they are both in the same line Flutter is Google’s mobile UI framework for crafting high-quality native interfaces on iOS and Android in record time. Flutter works with existing code, is used by developers and organizations around the world, and is free and open source. have a question , how can I put the show more behind the text , I mean it looks like this Flutter is Google’s mobile UI framework for... show more,they are both in the same line";
-final Data ?data;
+ Data? data;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(create: (BuildContext context)=>SearchStudentCubit(),
@@ -25,8 +25,7 @@ final Data ?data;
       listener: (context,state){
         if(state is EnrollOfferSuccessState)
           {
-          //  showMessageOnScreen(context: context, titleText: "Enroll Success", messageText: "");
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>HomeStudent()));
+            showMessageOnScreen(context: context, titleText: "Enroll Success", messageText: "Enrolled Successfully",backgroundColor: Colors.red);
           }
       },
       builder: (context,state){
@@ -180,6 +179,7 @@ final Data ?data;
                                             TextButton(
                                                 onPressed: () {
                                                   SearchStudentCubit.get(context).enrollInOffer(data!.id!);
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeStudent()));
                                                 },
                                                 child: Text(
                                                   'Enroll',

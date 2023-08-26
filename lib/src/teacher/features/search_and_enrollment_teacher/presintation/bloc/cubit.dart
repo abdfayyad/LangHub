@@ -94,7 +94,7 @@ class SearchTeacherCubit extends Cubit<SearchTeacherStatus>{
 
     try {
       print("tryyy");
-      emit(SearchTeacherLoadingStatus());
+      emit(EnrollInstituteTeacherErrorState());
 
       final response = await http.post(url, body: data);
       // Check if the request was successful
@@ -104,13 +104,11 @@ class SearchTeacherCubit extends Cubit<SearchTeacherStatus>{
         print('Login successful');
         print(response.body);
         final responseData = jsonDecode(response.body);
-        // return UserModel.fromJson(responseData);
-        searchTeacherModel=SearchTeacherModel.fromJson(responseData);
-        emit(SearchTeacherSuccessStatus(searchTeacherModel!));
-        // print(loginModel.role);
-        // print(loginModel.token);
+
+        emit(EnrollInstituteTeacherSuccessState());
+
       } else {
-        emit(SearchTeacherErrorStatus());
+        emit(EnrollInstituteTeacherErrorState());
         // Request failed, handle the error
         print('Login failed');
         print('Status code: ${response.statusCode}');

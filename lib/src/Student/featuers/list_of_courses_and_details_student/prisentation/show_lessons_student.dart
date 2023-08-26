@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lang_hub/src/Student/featuers/list_of_courses_and_details_student/data/show_lessons_student_model.dart';
 import 'package:lang_hub/src/Student/featuers/list_of_courses_and_details_student/prisentation/bloc/cubit.dart';
 import 'package:lang_hub/src/Student/featuers/list_of_courses_and_details_student/prisentation/bloc/status.dart';
 import 'package:lang_hub/src/util/colors.dart';
 
 class ShowLessonsStudent extends StatelessWidget {
-  const ShowLessonsStudent({Key? key}) : super(key: key);
-
+   ShowLessonsStudent({Key? key,required this.id}) : super(key: key);
+final int id;
+ShowLessonStudentModel ?showLessonStudentModel;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (BuildContext context)=>CourseStudentCubit(),
+    return BlocProvider(create: (BuildContext context)=>CourseStudentCubit()..getLessons(id),
 
     child:BlocConsumer<CourseStudentCubit,CourseStudentStatus>(
-      listener: (context,state){},
+      listener: (context,state){
+        if(state is ShowLessonStudentSuccessState)
+          showLessonStudentModel=state.showLessonStudentModel;
+      },
       builder: (context,state){
         return Scaffold(
           appBar: AppBar(
@@ -23,8 +28,8 @@ class ShowLessonsStudent extends StatelessWidget {
                 fontSize: 24.sp,fontWeight: FontWeight.bold,color: mainColor
             ),),
           ),
-          body: ListView.builder(
-              itemCount: 5,
+          body:showLessonStudentModel?.data==null?Center(child: CircularProgressIndicator(),): ListView.builder(
+              itemCount: showLessonStudentModel!.data!.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -43,7 +48,7 @@ class ShowLessonsStudent extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "tomoro I will give you the ant lesson the ant is an small animal",
+                            "${showLessonStudentModel!.data![index].name}",
                             style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.bold,
@@ -51,7 +56,7 @@ class ShowLessonsStudent extends StatelessWidget {
                           ),
                           SizedBox(height: 15.h,),
                           Text(
-                            "Q1:What is the ant",
+                            "${showLessonStudentModel!.data![index].title1}",
                             style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.normal,
@@ -59,7 +64,7 @@ class ShowLessonsStudent extends StatelessWidget {
                           ),
                           SizedBox(height: 10.h,),
                           Text(
-                            "Q2:Whate is the ant",
+                            "${showLessonStudentModel!.data![index].title2}",
                             style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.normal,
@@ -67,7 +72,7 @@ class ShowLessonsStudent extends StatelessWidget {
                           ),
                           SizedBox(height: 10.h,),
                           Text(
-                            "Q3:What is the ant",
+                            "${showLessonStudentModel!.data![index].title3}",
                             style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.normal,
@@ -75,7 +80,7 @@ class ShowLessonsStudent extends StatelessWidget {
                           ),
                           SizedBox(height: 10.h,),
                           Text(
-                            "Q4:what is the ant?",
+                            "${showLessonStudentModel!.data![index].title4}",
                             style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.normal,
@@ -83,7 +88,7 @@ class ShowLessonsStudent extends StatelessWidget {
                           ),
                           SizedBox(height: 10.h,),
                           Text(
-                            "Q5:What is the ant",
+                            "${showLessonStudentModel!.data![index].title5}",
                             style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.normal,
@@ -91,7 +96,7 @@ class ShowLessonsStudent extends StatelessWidget {
                           ),
                           SizedBox(height: 10.h,),
                           Text(
-                            "Q6:what is the ant?",
+                            "${showLessonStudentModel!.data![index].title6}",
                             style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.normal,

@@ -5,6 +5,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:lang_hub/src/teacher/features/list_of_courses_and_details_teacher/prisentation/show_lessons_teacher.dart';
 import 'package:lang_hub/src/util/colors.dart';
 import 'package:lang_hub/src/util/myTextField.dart';
+import 'package:lang_hub/src/util/show_message_on_screen.dart';
 
 import '../../../../util/details_container.dart';
 import '../../../../util/summary.dart';
@@ -189,12 +190,13 @@ class CourseDetails extends StatelessWidget {
                                                       q6Controller.text
 
                                                   );
+                                                  Navigator.pop(context);
+                                                  showMessageOnScreen(context: context, titleText: "Done", messageText: "add successfully lesson",backgroundColor: Colors.green,messageColor: Colors.red);
                                                 },
                                                     child: Text(
                                                       'Add', style: TextStyle(fontWeight: FontWeight
                                                         .bold, fontSize: 20.sp, color: mainColor),)),
                                               ],),
-                                            SizedBox(height: 30.h,),
 
                                           ],
                                         ),
@@ -223,7 +225,7 @@ class CourseDetails extends StatelessWidget {
                         fontSize: 16.sp, fontWeight: FontWeight.bold),
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => StudentList()));
+                          builder: (context) => StudentList(detailsCoursesTeacherModel!.course!.id!)));
                     }
                 ),
                 SpeedDialChild(

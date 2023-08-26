@@ -42,10 +42,10 @@ class ListOfCoursesStudent extends StatelessWidget {
         },
         builder: (context,state){
           return  Scaffold(
-            body:showCoursesAndOffersModel?.data==null?Center(child: CircularProgressIndicator(),): Column(
+            body: Column(
               children: [
                 SizedBox(height: 15.h,),
-                CarouselSlider(
+                showTenOffersModel==null?Center(child: CircularProgressIndicator(),): CarouselSlider(
                   options: CarouselOptions(
                     height: 200.0,
                     autoPlay: true,
@@ -68,7 +68,7 @@ class ListOfCoursesStudent extends StatelessWidget {
                       builder: (BuildContext context) {
                         return InkWell(
                           onTap: (){
-                           // Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsOffersEnrollment()));
+                             // Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsOffersEnrollment(data: showTenOffersModel.data[1],)));
                           }
                           ,
 
@@ -122,7 +122,7 @@ class ListOfCoursesStudent extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: InkWell(
                               onTap: (){
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailsCoursesStudent()));
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailsCoursesStudent(data:showCoursesAndOffersModel!.data![index])));
                                 // navigateTo(context, CourseDetails());
                               },
                               child: Container(
@@ -156,7 +156,7 @@ class ListOfCoursesStudent extends StatelessWidget {
                                         children: [
                                           Text('${showCoursesAndOffersModel!.data?[index].name}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp,color: mainColor),),
                                           Text('${showCoursesAndOffersModel!.data?[index].academy!.name}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp,color: mainColor),),
-                                          Text("${showCoursesAndOffersModel!.data?[index].startTime}",style: TextStyle(fontWeight: FontWeight.normal,fontSize: 16.sp,color: mainColor),)
+                                          Text("${showCoursesAndOffersModel!.data?[index].startDate}",style: TextStyle(fontWeight: FontWeight.normal,fontSize: 16.sp,color: mainColor),)
                                         ],
                                       ),
                                     )

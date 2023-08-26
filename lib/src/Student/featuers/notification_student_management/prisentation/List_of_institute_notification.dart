@@ -40,8 +40,8 @@ class ListOfInstituteNotification extends StatelessWidget {
                 )
               ],
             ),
-            body: ListView.builder(
-                itemCount: 5,
+            body:listAcceptInstituteNotificationModel?.data==null?Center(child: CircularProgressIndicator(),): ListView.builder(
+                itemCount: listAcceptInstituteNotificationModel!.data?.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -49,6 +49,7 @@ class ListOfInstituteNotification extends StatelessWidget {
                       onTap: () {
                         // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailsInstituteStudent(showStudentInstituteModel: showStudentInstituteModel!.data?[index].id,)));
                         // navigateTo(context, CourseDetails());
+
                         showDialog(
                             context: context,
                             builder: (BuildContext ccontext) => Center(

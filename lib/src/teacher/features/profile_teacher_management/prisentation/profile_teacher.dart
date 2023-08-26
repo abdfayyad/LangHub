@@ -20,7 +20,7 @@ import '../../../../util/show_message_on_screen.dart';
 class ProfileTeacher extends StatefulWidget {
 
 //proton vpn cli c -f -p tcp
-  late final String title;
+  //late final String title;
 
   @override
   _ProfileTeacherState createState() => _ProfileTeacherState();
@@ -121,7 +121,7 @@ class _ProfileTeacherState extends State<ProfileTeacher>
                               // ),
 
                               background: Image(
-                                image: NetworkImage('$URL_IMAGE${profileTeacherModel!.data!.photo}'),
+                                image: NetworkImage('${profileTeacherModel!.data!.photo}'),
                                 fit: BoxFit.fill,
                               ) ,
                             )
@@ -228,7 +228,7 @@ class _ProfileTeacherState extends State<ProfileTeacher>
                                         height:240,
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
-                                            image: NetworkImage('$URL_IMAGE${profileTeacherModel!.data!.posts![index].image}'),
+                                            image: NetworkImage('${profileTeacherModel!.data!.posts![index].image}'),
                                             fit: BoxFit.fill,
                                           ),
                                         ),

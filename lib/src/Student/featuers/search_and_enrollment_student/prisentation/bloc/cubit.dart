@@ -102,17 +102,20 @@ searchInstituteStudentModel=SearchInstituteStudentModel.fromJson(responseData);
     }
   }
 ///enroll in institute ----------------------------------
-  Future<void> enrollInInstitute(int id ) async {
+  Future<void> enrollInInstitute(int id ,String lang) async {
     emit(SearchStudentOfferLoadingState());
     final headers = {
       'Accept': 'application/json',
       'Authorization': 'Bearer ${SharedPref.getData(key: 'token')}', // Replace with your header key and value
     };
+    final data = {
+      'language': lang,
+      };
     emit(EnrollInstituteLoadingState());
     try {
       final response = await http.post(
-          Uri.parse('${URL}student/academies/join/$id'),
-          headers: headers
+          Uri.parse('${URL}student/academies/join/$id'),headers: headers,body: data
+
       );
 
       if (response.statusCode == 200) {

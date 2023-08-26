@@ -7,6 +7,7 @@ import 'package:lang_hub/src/both/splash/spalsh_screen.dart';
 
 import 'package:lang_hub/src/teacher/features/home/prisentation/home_teacher.dart';
 import 'package:lang_hub/src/teacher/features/list_of_courses_and_details_teacher/prisentation/add_degrees.dart';
+import 'package:lang_hub/src/teacher/features/search_and_enrollment_teacher/presintation/details_institute_enrollment_teacher.dart';
 import 'package:lang_hub/src/util/colors.dart';
 import 'package:lang_hub/src/util/shared_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,6 +42,6 @@ class MyApp extends StatelessWidget {
             home: child,
           );
         },
-        child: HomeStudent());
+        child: SplashScreen());
   }
 }

@@ -1,4 +1,5 @@
 import 'package:lang_hub/src/Student/featuers/profile_student_management/data/profile_model.dart';
+import 'package:lang_hub/src/Student/featuers/profile_student_management/prisentation/bloc/cubit.dart';
 
 import '../../data/show_certificate_model.dart';
 
@@ -32,6 +33,8 @@ class EditProfileStudentErrorState extends ProfileStudentStatus{}
 class ChangePasswordStudentLoadingState extends ProfileStudentStatus{}
 class ChangePasswordStudentSuccessState extends ProfileStudentStatus
 {
+ChangePasswordModel changePasswordModel;
 
+ChangePasswordStudentSuccessState(this.changePasswordModel);
 }
 class ChangePasswordStudentErrorState extends ProfileStudentStatus{}

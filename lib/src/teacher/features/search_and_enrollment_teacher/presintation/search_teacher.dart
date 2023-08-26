@@ -82,7 +82,7 @@ if(state is SearchTeacherSuccessStatus)
                           child: InkWell(
                             onTap: () {
 
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailsInstituteEnrollmentTeacher()));
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailsInstituteEnrollmentTeacher(searchTeacher: searchTeacherModel!.searchTeacher![index],)));
 
                             },
                             child: Container(

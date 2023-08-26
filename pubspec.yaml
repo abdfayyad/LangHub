@@ -51,6 +51,9 @@ dependencies:
   fluttertoast: ^8.2.2
   another_flushbar: ^1.12.30
   dio: ^5.3.2
+  lite_rolling_switch: ^1.0.1
+  flutter_material_pickers: ^3.6.0
+  intl: ^0.18.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

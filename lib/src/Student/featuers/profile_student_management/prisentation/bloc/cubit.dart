@@ -97,45 +97,49 @@ ShowCertificateModel ?showCertificateModel;
 
 
    ///change password----------------------------------
+  ChangePasswordModel? changePasswordModel;
   Future<void> changePasswordStudent(String oldPassword, String newPassword) async {
     final headers = {
       'Accept': 'application/json',
       'Authorization': 'Bearer ${SharedPref.getData(key: 'token')}', // Replace with your header key and value
     };
-    // Define the API endpoint URL
-    final url = Uri.parse('${URL}student/profile/change-password');
 
-    // Create a map with the request data
+    final url = Uri.parse('${URL}student/profile/change-password');
     final data = {
       'current_password': oldPassword,
       'new_password': newPassword};
-
     try {
       emit(ChangePasswordStudentLoadingState());
       final response = await http.post(url, body: data,headers: headers);
-
-      // Check if the request was successful
       if (response.statusCode == 200) {
-        // Request successful, do something with the response
-        print('change password successful');
-        print(response.body);
         final responseData = jsonDecode(response.body);
-        // return UserModel.fromJson(responseData);
-        // loginModel=LoginModel.fromJson(responseData);
-        emit(ChangePasswordStudentSuccessState());
-        // print(loginModel.role);
-        // print(loginModel.token);
+         changePasswordModel=ChangePasswordModel.fromJson(responseData);
+        emit(ChangePasswordStudentSuccessState(changePasswordModel!));
       } else {
         emit(ChangePasswordStudentErrorState());
-        // Request failed, handle the error
         print('Login failed');
-        print('Status code: ${response.statusCode}');
-        print('Error message: ${response.body}');
       }
     } catch (e) {
       emit(ChangePasswordStudentErrorState());
-      // An error occurred during the request
       print('Error: $e');
     }
+  }
+}
+class ChangePasswordModel {
+  int? status;
+  String? message;
+
+  ChangePasswordModel({this.status, this.message});
+
+  ChangePasswordModel.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    message = json['message'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status'] = this.status;
+    data['message'] = this.message;
+    return data;
   }
 }

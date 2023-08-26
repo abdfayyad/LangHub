@@ -9,3 +9,10 @@ class SearchTeacherSuccessStatus extends SearchTeacherStatus{
   SearchTeacherSuccessStatus(this.searchTeacherModel);
 }
 class SearchTeacherErrorStatus extends SearchTeacherStatus{}
+
+///enroll in institute status--------------------------
+class EnrollInstituteTeacherLoadingState extends SearchTeacherStatus{}
+class EnrollInstituteTeacherSuccessState extends SearchTeacherStatus{
+}
+class EnrollInstituteTeacherErrorState extends SearchTeacherStatus{}
+

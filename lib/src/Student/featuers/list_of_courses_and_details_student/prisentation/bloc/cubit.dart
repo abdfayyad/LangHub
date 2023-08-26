@@ -1,8 +1,11 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:lang_hub/src/Student/featuers/list_of_courses_and_details_student/data/Question.dart';
+import 'package:lang_hub/src/Student/featuers/list_of_courses_and_details_student/data/show_lessons_student_model.dart';
 import 'package:lang_hub/src/Student/featuers/list_of_courses_and_details_student/prisentation/bloc/status.dart';
 import 'package:http/http.dart'as http;
+import 'package:lang_hub/src/Student/featuers/list_of_courses_and_details_student/prisentation/solve_exam_student.dart';
 import 'package:lang_hub/src/util/end_pointes.dart';
 
 import '../../../../../util/shared_preferences.dart';
@@ -60,45 +63,30 @@ class CourseStudentCubit extends Cubit<CourseStudentStatus>{
     }
   }
   ///get details course student----------------------------
-  // Future<ShowCoursesAndOffersModel?> getDetailsCourse() async {
-  //   final headers = {
-  //     'Accept': 'application/json',
-  //     'Authorization': 'Bearer ${SharedPref.getData(key: 'token')}', // Replace with your header key and value
-  //   };
-  //   final response = await http.get(
-  //       Uri.parse('${URL}student/offers/ten'),headers: headers);
-  //
-  //   if (response.statusCode == 200) {
-  //     print("ten  offers success");
-  //     print(response.body);
-  //     final parsedJson = jsonDecode(response.body);
-  //     print(response.body);
-  //     showTenOffersModel= ShowTenOffersModel.fromJson(parsedJson);
-  //     print(showTenOffersModel!.message);
-  //     emit(TenOffersSuccessState(showTenOffersModel!));
-  //   }else {
-  //     print("ten offers  field");
-  //     emit(TenOffersErrorState());
-  //     throw Exception('Failed to load profile data');
-  //   }
-  // }
+  ShowLessonStudentModel ?showLessonStudentModel;
+  Future<ShowLessonStudentModel?> getLessons(int id) async {
+    final headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${SharedPref.getData(key: 'token')}', // Replace with your header key and value
+    };
+    emit(ShowLessonStudentLoadingState());
+    final response = await http.get(
+        Uri.parse('${URL}student/courses/${id}/lessons'),headers: headers);
 
+    if (response.statusCode == 200) {
+      print("institute details success");
+      print(response.body);
+      final parsedJson = jsonDecode(response.body);
+      print(response.body);
+      showLessonStudentModel= ShowLessonStudentModel.fromJson(parsedJson);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      emit(ShowLessonStudentSuccessState(showLessonStudentModel!));
+    }else {
+      print("certificate field");
+      emit(ShowLessonStudentErrorState());
+      throw Exception('Failed to load profile data');
+    }
+  }
   ///solve exam-------------------------------------------------
 //   Future<void> solveExam(String email, String password) async {
 //     // Define the API endpoint URL
@@ -122,8 +110,7 @@ class CourseStudentCubit extends Cubit<CourseStudentStatus>{
 //         // return UserModel.fromJson(responseData);
 //         loginModel=LoginModel.fromJson(responseData);
 //         emit(LoginScreenSuccessState(loginModel));
-//         // print(loginModel.role);
-//         // print(loginModel.token);
+
 //       } else {
 //         emit(LoginScreenErrorState());
 //         // Request failed, handle the error
@@ -135,4 +122,31 @@ class CourseStudentCubit extends Cubit<CourseStudentStatus>{
 // print(e);
 //     }
 //   }
+
+///get question
+ ShowExamQuestionModel? showExamQuestionModel;
+  Future<ShowExamQuestionModel?> getQuestion(int id ) async {
+    final headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${SharedPref.getData(key: 'token')}', // Replace with your header key and value
+    };
+    emit(ShowQuestionLoadingState());
+    final response = await http.get(
+        Uri.parse('${URL}student/courses/${id}/questions'),headers: headers);
+
+    if (response.statusCode == 200) {
+      print("institute details success");
+      print(response.body);
+      final parsedJson = jsonDecode(response.body);
+      print(response.body);
+      showExamQuestionModel= ShowExamQuestionModel.fromJson(parsedJson);
+      emit(ShowQuestionSuccessState(showExamQuestionModel!));
+    }else {
+      print("certificate field");
+      emit(ShowQuestionErrorState());
+      throw Exception('Failed to load profile data');
+    }
+  }
+
+
 }

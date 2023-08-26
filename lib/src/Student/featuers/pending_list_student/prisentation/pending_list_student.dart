@@ -14,6 +14,7 @@ class PendingListStudent extends StatelessWidget {
     return BlocProvider(create: (BuildContext context)=>PendingListStudentCubit()..getPendingList(),
     child: BlocConsumer<PendingListStudentCubit,PendingListStudentStatus>(
       listener: (context,state){
+// if(state is PendingListStudentSuccessState)
 
       },
       builder: (context,state){

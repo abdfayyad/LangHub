@@ -41,27 +41,33 @@ ProfileTeacherModel ?profileTeacherModel;
 
   ///update information profile
   Future<void> updateProfile(
-     String? name,
-     String ?email,
-     String? phone,
-     File ?imageFile,
+     // String name,
+     String email,
+     String phone,
+     // File? imageFile
  ) async {
-    String url = '${URL}student/profile'; // Replace with your API URL
+    final headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${SharedPref.getData(key: 'token')}', // Replace with your header key and value
+    };
+    String url = '${URL}teacher/profile'; // Replace with your API URL
 
     var request = http.MultipartRequest('POST', Uri.parse(url));
-    request.fields['name'] = name!;
-    request.fields['email'] = email!;
-    request.fields['phone'] = phone!;
-
-    request.files.add(http.MultipartFile(
-      'image',
-      imageFile!.readAsBytes().asStream(),
-      imageFile.lengthSync(),
-      filename: imageFile.path.split('/').last,
-    ));
+    //request.fields['name'] = name;
+    request.fields['email'] = email;
+    request.fields['phone_number'] = phone;
+    request.headers.addAll(headers);
+    //    if(imageFile!=null){
+    // request.files.add(http.MultipartFile(
+    // 'photo',
+    // imageFile.readAsBytes().asStream(),
+    // imageFile.lengthSync(),
+    // filename: imageFile.path.split('/').last,
+    // ));
+    // }
 
     var response = await request.send();
-emit(UpdateProfileTeacherLoadingState());
+    emit(UpdateProfileTeacherLoadingState());
     if (response.statusCode == 200) {
       print('Upload success');
 
@@ -104,6 +110,7 @@ emit(UpdateProfileTeacherLoadingState());
     }
   }
 ///change password--------------------------------------------------------------------------------
+  ChangePasswordModel? changePasswordModel;
   Future<void> changePassword(String oldPassword, String newPassword) async {
     // Define the API endpoint URL
     final url = Uri.parse('${URL}teacher/profile/change-password');
@@ -127,8 +134,8 @@ emit(UpdateProfileTeacherLoadingState());
         print(response.body);
         final responseData = jsonDecode(response.body);
         // return UserModel.fromJson(responseData);
-     //   loginModel=LoginModel.fromJson(responseData);
-        emit(ChangePasswordProfileTeacherSuccessState());
+      changePasswordModel=ChangePasswordModel.fromJson(responseData);
+        emit(ChangePasswordProfileTeacherSuccessState(changePasswordModel!));
         // print(loginModel.role);
         // print(loginModel.token);
       } else {

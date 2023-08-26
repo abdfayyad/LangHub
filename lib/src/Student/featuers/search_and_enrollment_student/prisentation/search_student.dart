@@ -96,7 +96,7 @@ SearchInstituteStudentModel ? searchInstituteStudentModel;
                   BlocProvider.of<SearchStudentCubit>(context).cc == 1
                       ? Expanded(
                           child:searchInstituteStudentModel?.data==null?Center(child: CircularProgressIndicator(),): ListView.builder(
-                              itemCount: searchInstituteStudentModel?.data!.length,
+                              itemCount: searchInstituteStudentModel!.data!.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -106,7 +106,7 @@ SearchInstituteStudentModel ? searchInstituteStudentModel;
                                       print(BlocProvider.of<SearchStudentCubit>(
                                               context)
                                           .cc);
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailsInstituteEnrollment()));
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailsInstituteEnrollment(dat: searchInstituteStudentModel!.data![index],)));
 
                                     },
                                     child: Container(
@@ -125,8 +125,8 @@ SearchInstituteStudentModel ? searchInstituteStudentModel;
                                             width: 10.w,
                                           ),
                                           CircleAvatar(
-                                            backgroundImage: AssetImage(
-                                                'assets/images/p.png'),
+                                            backgroundImage: NetworkImage(
+                                                '${searchInstituteStudentModel!.data![index].image}'),
                                             radius: 45.r,
                                           ),
                                           Padding(
@@ -134,12 +134,12 @@ SearchInstituteStudentModel ? searchInstituteStudentModel;
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
-                                                      .spaceBetween,
+                                                      .spaceAround,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  ' ALTC institue',
+                                                  ' ${searchInstituteStudentModel!.data![index].name}',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -147,33 +147,33 @@ SearchInstituteStudentModel ? searchInstituteStudentModel;
                                                       color: mainColor),
                                                 ),
                                                 Text(
-                                                  ' English antro a',
+                                                  ' ${searchInstituteStudentModel!.data![index].location}',
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 16.sp,
                                                       color: mainColor),
                                                 ),
-                                                RatingBarIndicator(
-                                                  rating: 3,
-                                                  itemSize: 25,
-                                                  //initialRating: 3,
-                                                  // minRating: 1,
-                                                  direction: Axis.horizontal,
-                                                  //allowHalfRating: false,
-                                                  itemCount: 5,
-                                                  itemPadding:
-                                                      EdgeInsets.symmetric(
-                                                          horizontal: 0.0),
-                                                  itemBuilder: (context, _) =>
-                                                      Icon(
-                                                    Icons.star,
-                                                    color: Colors.amber,
-                                                  ),
-                                                  // onRatingUpdate: (rating) {
-                                                  //   print(rating);
-                                                  // },
-                                                ),
+                                                // RatingBarIndicator(
+                                                //   rating: searchInstituteStudentModel!.data![index].,
+                                                //   itemSize: 25,
+                                                //   //initialRating: 3,
+                                                //   // minRating: 1,
+                                                //   direction: Axis.horizontal,
+                                                //   //allowHalfRating: false,
+                                                //   itemCount: 5,
+                                                //   itemPadding:
+                                                //       EdgeInsets.symmetric(
+                                                //           horizontal: 0.0),
+                                                //   itemBuilder: (context, _) =>
+                                                //       Icon(
+                                                //     Icons.star,
+                                                //     color: Colors.amber,
+                                                //   ),
+                                                //   // onRatingUpdate: (rating) {
+                                                //   //   print(rating);
+                                                //   // },
+                                                // ),
                                               ],
                                             ),
                                           )

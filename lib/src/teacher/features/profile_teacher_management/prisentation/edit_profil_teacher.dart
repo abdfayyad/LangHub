@@ -54,17 +54,32 @@ class _EditProfileTeacherState extends State<EditProfileTeacher> {
     _controllerPhone.text = "${widget.profileTeacherModel?.data!.phoneNumber!}";
     imageEdit = "${widget.profileTeacherModel?.data!.photo}";
   }
-
+bool back=false;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(create: (BuildContext context) => ProfileTeacherCubit(),
       child: BlocConsumer<ProfileTeacherCubit, ProfileTeacherStatus>(
         listener: (context, state) {
           if (state is ChangePasswordProfileTeacherSuccessState) {
-            showMessageOnScreen(
+            if(state.changePasswordModel.status==200){
+              showMessageOnScreen(
+                  context: context,
+                  titleText: "Success",
+                  messageText: "Password changed successfully",
+messageColor: Colors.red,
+              backgroundColor: Colors.green);
+back=true;
+            }else{
+              showMessageOnScreen(
                 context: context,
                 titleText: "Error",
-                messageText: "deleted don't completed");
+                messageText: "The current password is incorrect",
+              );
+            }
+          }else{
+
+
+
           }
         },
         builder: (context, state) {
@@ -160,7 +175,7 @@ class _EditProfileTeacherState extends State<EditProfileTeacher> {
                           .image // Convert FileImage to ImageProvider
                           : imageEdit != null
                           ? NetworkImage(
-                          "$URL_IMAGE$imageEdit") // Display the existing image
+                          "$imageEdit") // Display the existing image
                           : null, // Display the default icon
 
                       child: _image == null && imageEdit == null
@@ -282,6 +297,8 @@ class _EditProfileTeacherState extends State<EditProfileTeacher> {
                                                                   .text,
                                                               _controllerNewPassword
                                                                   .text);
+
+                                                            Navigator.pop(context);
                                                         },
                                                         child: Text(
                                                           'Change',
@@ -314,7 +331,7 @@ class _EditProfileTeacherState extends State<EditProfileTeacher> {
                       textColor: fillColorInTextFormField,
                       function: () {
                         ProfileTeacherCubit.get(context).updateProfile(
-                            _controllerName.text,_controllerEmail.text,_controllerPhone.text,_image
+                            _controllerEmail.text,_controllerPhone.text
                         );
                       }),
                   SizedBox(height: 300.h),

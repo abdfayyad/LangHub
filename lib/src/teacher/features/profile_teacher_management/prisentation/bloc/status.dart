@@ -24,7 +24,9 @@ class AddPostProfileTeacherErrorState extends ProfileTeacherStatus{}
 ///
 class ChangePasswordProfileTeacherLoadingState extends ProfileTeacherStatus{}
 class ChangePasswordProfileTeacherSuccessState extends ProfileTeacherStatus{
+ChangePasswordModel changePasswordModel;
 
+ChangePasswordProfileTeacherSuccessState(this.changePasswordModel);
 }
 class ChangePasswordProfileTeacherErrorState extends ProfileTeacherStatus{}
 
@@ -34,3 +36,22 @@ class DeletePostProfileTeacherSuccessState extends ProfileTeacherStatus{
 
 }
 class DeletePostProfileTeacherErrorState extends ProfileTeacherStatus{}
+
+class ChangePasswordModel {
+  int? status;
+  String? message;
+
+  ChangePasswordModel({this.status, this.message});
+
+  ChangePasswordModel.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    message = json['message'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status'] = this.status;
+    data['message'] = this.message;
+    return data;
+  }
+}

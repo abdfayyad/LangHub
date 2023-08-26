@@ -48,7 +48,7 @@ class ProfileStudent extends StatelessWidget {
                             IconButton(
                                 color: fillColorInTextFormField,
                                 onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfileStudent()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfileStudent(profileStudentModel: profileStudentModel,)));
                                 },
                                 icon: Icon(Icons.edit)),
                             IconButton(

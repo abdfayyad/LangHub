@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lang_hub/src/Student/featuers/search_and_enrollment_student/data/search_institute_student_mode.dart';
 import 'package:lang_hub/src/Student/featuers/search_and_enrollment_student/prisentation/bloc/cubit.dart';
 import 'package:lang_hub/src/Student/featuers/search_and_enrollment_student/prisentation/bloc/status.dart';
 import 'package:lang_hub/src/teacher/features/home/prisentation/widget/checkboxLanguge.dart';
@@ -15,7 +16,8 @@ import '../../../../util/defaultbutton.dart';
 import '../../../../util/details_container.dart';
 
 class DetailsInstituteEnrollment extends StatelessWidget {
-   DetailsInstituteEnrollment({Key? key}) : super(key: key);
+   DetailsInstituteEnrollment({Key? key, required this.dat}) : super(key: key);
+   Data ?dat;
   final String description =
       "Flutter is Google’s mobile UI framework for crafting high-quality native interfaces on iOS and Android in record time. Flutter works with existing code, is used by developers and organizations around the world, and is free and open source. have a question , how can I put the show more behind the text , I mean it looks like this Flutter is Google’s mobile UI framework for... show more,they are both in the same line Flutter is Google’s mobile UI framework for crafting high-quality native interfaces on iOS and Android in record time. Flutter works with existing code, is used by developers and organizations around the world, and is free and open source. have a question , how can I put the show more behind the text , I mean it looks like this Flutter is Google’s mobile UI framework for... show more,they are both in the same line";
    final List<String> items =   [
@@ -24,7 +26,7 @@ class DetailsInstituteEnrollment extends StatelessWidget {
      'Spanish',
      'Germany',
    ];
-   String? selectedValue;
+   String? selectedValue="English";
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class DetailsInstituteEnrollment extends StatelessWidget {
                     height: 15.h,
                   ),
                   CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/p.png'),
+                    backgroundImage: NetworkImage('${dat!.image}'),
                     radius: 110.r,
                   ),
                   SizedBox(
@@ -69,17 +71,17 @@ class DetailsInstituteEnrollment extends StatelessWidget {
                       ShowRateInstituteAndTeacher(rate: 3),
                     ],
                   ),
-                  detailsContainer(text: 'ALTC institute'),
-                  detailsContainer(text: 'Baghdad street'),
+                  detailsContainer(text: '${dat!.name}'),
+                  detailsContainer(text: '${dat!.location}'),
                   SizedBox(
                     height: 15.h,
                   ),
                   LanguageInDetailsInstitute(
-                      english: true, french: true, spanish: true, germany: true),
+                      english: dat!.english!.isOdd, french: dat!.french!.isOdd, spanish: dat!.spanish!.isOdd, germany: dat!.germany!.isOdd),
                   SizedBox(
                     height: 15.h,
                   ),
-                  ShowMoreShowLess(text: description),
+                  ShowMoreShowLess(text: dat!.description),
                   SizedBox(
                     height: 15.h,
                   ),
@@ -107,14 +109,18 @@ class DetailsInstituteEnrollment extends StatelessWidget {
 
                                       children: <Widget>[
                                         Text("Please visit us within a maximum of four days",style: TextStyle(fontWeight: FontWeight.normal,fontSize: 20.sp,color: mainColor)),
-                                        DropListItem(item:items.first , s:items),
+                                        DropListItem(item:selectedValue , s:items),
 
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.end,
                                           children: [
-                                            TextButton(onPressed: (){}, child: Text('cancel',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp,color: mainColor),)),
+                                            TextButton(onPressed: (){
+
+                                            }, child: Text('cancel',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp,color: mainColor),)),
                                             SizedBox(width: 10.w,),
-                                            TextButton(onPressed: (){}, child: Text('Enroll',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp,color: mainColor),)),
+                                            TextButton(onPressed: (){
+                                              //SearchStudentCubit.get(context).enrollInInstitute(dat!.id!,);
+                                            }, child: Text('Enroll',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp,color: mainColor),)),
                                           ],),
 
 
@@ -126,7 +132,7 @@ class DetailsInstituteEnrollment extends StatelessWidget {
                             )
                         );
                       },
-                      text: 'Sign up',
+                      text: 'Enroll',
                       //textColor: Colors.white,
                       width: 128.w,
                       height: 41.h,

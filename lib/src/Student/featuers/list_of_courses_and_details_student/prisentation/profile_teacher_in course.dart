@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lang_hub/src/Student/featuers/list_of_courses_and_details_student/data/courses_and_offers_model.dart';
 import 'package:lang_hub/src/Student/featuers/list_of_courses_and_details_student/prisentation/bloc/cubit.dart';
 import 'package:lang_hub/src/util/colors.dart';
 
@@ -11,7 +12,8 @@ import '../../../../util/summary.dart';
 import 'bloc/status.dart';
 
 class ProfileTeacherInCourse extends StatelessWidget {
-  const ProfileTeacherInCourse({Key? key}) : super(key: key);
+  const ProfileTeacherInCourse({Key? key,required this.teacher}) : super(key: key);
+  final Teacher teacher;
   final String description =
   "Flutter is Google’s mobile UI framework for crafting high-quality native interfaces on iOS and Android in record time. Flutter works with existing code, is used by developers and organizations around the world, and is free and open source. have a question , how can I put the show more behind the text , I mean it looks like this Flutter is Google’s mobile UI framework for... show more,they are both in the same line Flutter is Google’s mobile UI framework for crafting high-quality native interfaces on iOS and Android in record time. Flutter works with existing code, is used by developers and organizations around the world, and is free and open source. have a question , how can I put the show more behind the text , I mean it looks like this Flutter is Google’s mobile UI framework for... show more,they are both in the same line";
 
@@ -38,59 +40,52 @@ class ProfileTeacherInCourse extends StatelessWidget {
                     height: 15.h,
                   ),
                   CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/p.png'),
+                    backgroundImage: NetworkImage('${teacher.photo}'),
                     radius: 110.r,
                   ),
                   SizedBox(
                     height: 15.h,
                   ),
 
-                  ShowRateInstituteAndTeacher(rate: 3),
+                 // ShowRateInstituteAndTeacher(rate: 3),
                   SizedBox(height: 15.h,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'You rate:',
-                        style: TextStyle(
-                            color: mainColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.sp),
-                      ),
-                      RatingBar.builder(
-                        initialRating: 3,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: true,
-                        itemCount: 5,
-                        itemSize: 28,
-                        itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
-                        itemBuilder: (context, _) => Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        onRatingUpdate: (rating) {
-                          print(rating);
-                        },
-                      ),
-                    ],
-                  ),
-                  detailsContainer(text: 'Abd fy'),
-                  detailsContainer(text: '0936251498'),
-                  detailsContainer(text: 'abd@gmail.com'),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     Text(
+                  //       'You rate:',
+                  //       style: TextStyle(
+                  //           color: mainColor,
+                  //           fontWeight: FontWeight.bold,
+                  //           fontSize: 20.sp),
+                  //     ),
+                  //     RatingBar.builder(
+                  //       initialRating: 3,
+                  //       minRating: 1,
+                  //       direction: Axis.horizontal,
+                  //       allowHalfRating: true,
+                  //       itemCount: 5,
+                  //       itemSize: 28,
+                  //       itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
+                  //       itemBuilder: (context, _) => Icon(
+                  //         Icons.star,
+                  //         color: Colors.amber,
+                  //       ),
+                  //       onRatingUpdate: (rating) {
+                  //         print(rating);
+                  //       },
+                  //     ),
+                  //   ],
+                  // ),
+                  detailsContainer(text: '${teacher.firstName}+${teacher.lastName}'),
+                  detailsContainer(text: '${teacher.phoneNumber}'),
+                  detailsContainer(text: '${teacher.email}'),
                   SizedBox(
                     height: 15.h,
                   ),
-
                   SizedBox(
                     height: 15.h,
                   ),
-                  ShowMoreShowLess(text: description),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-
-
                 ],
               ),
             ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lang_hub/src/teacher/features/list_of_courses_and_details_teacher/data/studentForAddDegreeModel.dart';
 import 'package:lang_hub/src/teacher/features/list_of_courses_and_details_teacher/prisentation/bloc/status.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,7 +28,6 @@ class CourseTeacherCubit extends Cubit<CourseTeacherStatus>{
       print("institute details success");
       print(response.body);
       final parsedJson = jsonDecode(response.body);
-      // print(response.body);
       allCoursesTeacherModel= AllCoursesTeacherModel.fromJson(parsedJson);
       print(allCoursesTeacherModel!.message);
       emit(CourseTeacherSuccessState(allCoursesTeacherModel!));
@@ -64,7 +64,7 @@ class CourseTeacherCubit extends Cubit<CourseTeacherStatus>{
   }
   ///show lessons teacher-----------------------------------------------------------
   ShowLessonsTeacherModel? showLessonsTeacherModel;
-  Future<AllCoursesTeacherModel?> getLessons(int id) async {
+  Future<ShowLessonsTeacherModel?> getLessons(int id) async {
     final headers = {
       'Accept': 'application/json',
       'Authorization': 'Bearer ${SharedPref.getData(key: 'token')}', // Replace with your header key and value
@@ -136,6 +136,49 @@ class CourseTeacherCubit extends Cubit<CourseTeacherStatus>{
       emit(state);
       print("An error occurred: $e");
 
+    }
+  }
+///
+  StudentForAddDegreeModel ?studentForAddDegreeModel;
+  Future<StudentForAddDegreeModel?> getStudentForAddDegree(int id) async {
+    final headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${SharedPref.getData(key: 'token')}', // Replace with your header key and value
+    };
+    final response = await http.get(
+        Uri.parse('${URL}teacher/courses/$id/students-marks'),headers: headers);
+
+    if (response.statusCode == 200) {
+
+      final parsedJson = jsonDecode(response.body);
+      print(parsedJson);
+      studentForAddDegreeModel= StudentForAddDegreeModel.fromJson(parsedJson);
+      emit(GetStudentAddDegreeSuccessState(studentForAddDegreeModel!));
+    }else {
+      print("certificate field");
+     emit(GetStudentAddDegreeErrorState());
+      throw Exception('Failed to load profile data');
+    }
+  }
+
+  AddDegreeModel? addDegreeModel;
+  Future<void> AddDegree(int id,String data) async {
+    final headers = {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${SharedPref.getData(key: 'token')}', // Replace with your header key and value
+    };
+    final response = await http.post(
+        Uri.parse('${URL}teacher/courses/$id/add-marks'),headers: headers,body: data);
+
+    if (response.statusCode == 200) {
+      final parsedJson = jsonDecode(response.body);
+      print(parsedJson);
+      addDegreeModel= AddDegreeModel.fromJson(parsedJson);
+      emit(AddDegreeSuccessState(addDegreeModel!));
+    }else {
+      print("certificate field");
+      emit(AddDegreeErrorState());
+      throw Exception('Failed to load profile data');
     }
   }
 }
